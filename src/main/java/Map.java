@@ -40,7 +40,6 @@ public class Map {
     public void print() {
 
         String buffer = "                        | ";
-        this.rooms[14].setClear();
         checkClear();
         System.out.println("LOADING MAP...\n");
 
