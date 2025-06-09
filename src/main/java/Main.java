@@ -84,7 +84,4 @@ public class Main {
 		clearConsole();
 		System.out.println("Waiting for jerry to finish...");
 	}
-
-
-
 }
