@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-static Map map = new Map();
+
 	public static void main(String args[]) {
 		mainMenu();
 	}
@@ -38,7 +38,7 @@ static Map map = new Map();
 			switch (choice) {
 				case 1:
 					System.out.print("Choose a name: ");
-					String name = scanner.nextLine();
+					name = scanner.nextLine();
 					showGame();
 					running = false;
 					break;
@@ -82,8 +82,7 @@ static Map map = new Map();
 
 	public static void showGame() {
 		clearConsole();
-		map.checkClear();
-		map.print();
+		System.out.println("Waiting for jerry to finish...");
 	}
 
 

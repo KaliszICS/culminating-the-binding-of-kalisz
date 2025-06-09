@@ -2,7 +2,10 @@ import java.util.Scanner;
 
 public class Combat {
     // Player attributes
-    static String playerName = "Test";
+    
+    // Room variable
+
+    static String playerName = Main.name;
     static int playerHp = 100;
     static int playerMaxHp = 100;
     static int playerMp = 100;
@@ -31,7 +34,7 @@ public class Combat {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void mainCombat(Room room) {
+    public static void mainCombat() {
         // Main battle loop: continues until one side's HP drops to 0
         while (playerHp > 0 && enemyHp > 0) {
             displayBattleScreen();
@@ -44,7 +47,8 @@ public class Combat {
             }
             enemyTurn();
             if (playerHp <= 0) {
-                System.out.println("\nYou have been defeated. Game over.");
+                System.out.println("\nYou have been defeated. Room clear.");
+                //end battle, here you can call what room the player cleared and like what's next
                 break;
             }
             System.out.println("\n--------------------- End of Turn ---------------------\n");

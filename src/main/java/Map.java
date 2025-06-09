@@ -112,7 +112,7 @@ public class Map {
 
     }
 
-    public void roomSelection(){
+    public void roomSelection() {
         int option = -1;
         Scanner input = new Scanner(System.in);
         System.out.println("Choose an available room: ");
@@ -133,6 +133,7 @@ public class Map {
             input.nextLine();
             if(option <= unlockedRooms.size() &&  option > 0){
                 running = false;
+                Main.startCombat();
             }
             else{
                 System.out.println("Invalid choice! Please enter a valid number");
