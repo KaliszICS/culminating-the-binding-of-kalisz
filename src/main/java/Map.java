@@ -98,6 +98,7 @@ public class Map {
                     break;
                 case 2:
                     System.out.println("Opening Inventory...");
+                    //run inventory
                     running = false;
                     break;
                 case 3:
@@ -139,5 +140,6 @@ public class Map {
             }
         }
         currentRoom = unlockedRooms.get(option);
+        Main.startCombat;
 }
 }
