@@ -7,7 +7,7 @@ public class Combat {
     static int playerMaxHp = 100;
     static int playerMp = 100;
     static int playerMaxMp = 100;
-    static int playerSpeed = 50;
+    static int playerSpeed = 500;
 
     // Enemy attributes
     static String enemyName = "Johnson";
@@ -31,13 +31,15 @@ public class Combat {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void mainCombat() {
+    public static void mainCombat(Room room) {
         // Main battle loop: continues until one side's HP drops to 0
         while (playerHp > 0 && enemyHp > 0) {
             displayBattleScreen();
             playerTurn();
             if (enemyHp <= 0) {
                 System.out.println("\nEnemy " + enemyName + " is defeated! You win!");
+                room.setClear();
+                Main.showGame();
                 break;
             }
             enemyTurn();

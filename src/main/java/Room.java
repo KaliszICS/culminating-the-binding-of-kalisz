@@ -20,10 +20,6 @@ public class Room {
         }
     }
 
-    public static void map() {
-    
-  }
-
         public String getRoomID(){
             return this.roomID;
         }

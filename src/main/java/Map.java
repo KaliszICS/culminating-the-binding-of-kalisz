@@ -16,14 +16,15 @@ public class Map {
             22, 19, 24, 25, 26, 24, 28, 29, 28, 28 };
             for (int i = 1; i < numberOfRooms + 1; i++) {
                 if (i < 10) {
-                Room room = new Room("L0" + (i), i, previousRooms[i - 1]);
-                rooms[i - 1] = room;
+                    Room room = new Room("L0" + (i), i, previousRooms[i - 1]);
+                    rooms[i - 1] = room;
             } else {
                 Room room = new Room("L" + i, i, previousRooms[i - 1]);
                 rooms[i - 1] = room;
             }
         }
         this.currentRoom = rooms[0];
+        this.unlockedRooms.add(this.currentRoom);
     }
 
     public void clearRooom(int roomNumber) {
@@ -51,8 +52,6 @@ public class Map {
     public void print() {
 
         String buffer = "                        | ";
-        this.rooms[0].setClear();
-        this.rooms[1].setClear();
         checkClear();
         System.out.println("LOADING MAP...\n");
 
@@ -127,7 +126,7 @@ public class Map {
             System.out.print("\nType a choice: ");
             while(!input.hasNextInt()){
                 input.nextLine();
-                System.out.println("Invalid choice! Please enter a number from 1 to " + this.unlockedRooms.size() +  ".");
+                System.out.println("Invalid choice! Please enter a valid number");
                 System.out.print("\nType a choice: ");
             }
             option = input.nextInt();
@@ -136,10 +135,10 @@ public class Map {
                 running = false;
             }
             else{
-                System.out.println("Invalid choice! Please enter a number from 1 to " + this.unlockedRooms.size() +  ".");
+                System.out.println("Invalid choice! Please enter a valid number");
             }
         }
-        currentRoom = unlockedRooms.get(option);
-        Main.startCombat;
+        currentRoom = unlockedRooms.get(option-1);
+        Combat.mainCombat(currentRoom);
 }
 }

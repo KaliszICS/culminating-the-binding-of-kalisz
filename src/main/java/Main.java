@@ -2,10 +2,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-
+static Map map = new Map();
 	public static void main(String args[]) {
-		Map map = new Map();
-		map.print();
+		mainMenu();
 	}
 
 	//INTERNET HELP (https://github.com/karlasophiacruz/p3-softwareproject-refactoried/blob/9e01fb2e424f91121c1b64e6328e8450227d02d5/payroll/src/app/AuxFunctions.java)
@@ -83,6 +82,10 @@ public class Main {
 
 	public static void showGame() {
 		clearConsole();
-		System.out.println("Waiting for jerry to finish...");
+		map.checkClear();
+		map.print();
 	}
+
+
+
 }
