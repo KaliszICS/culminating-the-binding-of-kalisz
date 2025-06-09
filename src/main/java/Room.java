@@ -40,6 +40,10 @@ public class Room {
             return this.previousRoom;
         }
 
+        public int getRoomNumber(){
+          return this.roomNumber;
+        }
+
         public void setClear(){
           this.isCleared = true;
         }
