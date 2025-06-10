@@ -30,7 +30,7 @@ public class Map {
     public void clearRoom(int roomNumber) {
         this.rooms[roomNumber].setClear();
         for(int i = 0; i < unlockedRooms.size(); i++){
-            if(roomNumber == unlockedRooms.get(i).getRoomNumber()){
+            if(roomNumber == unlockedRooms.get(i).getRoomNumber()-1){
                 this.unlockedRooms.remove(i);
             }
         }
