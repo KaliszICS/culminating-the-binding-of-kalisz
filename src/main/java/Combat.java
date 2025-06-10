@@ -1,23 +1,14 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Combat {
     // Player attributes
-    
-    // Room variable
-
     static String playerName = Main.name;
     static int playerHp = 100;
     static int playerMaxHp = 100;
     static int playerMp = 100;
     static int playerMaxMp = 100;
     static int playerSpeed = 500;
-
-    // Enemy attributes
-    static String enemyName = "Johnson";
-    static int enemyHp = 100;
-    static int enemyMaxHp = 100;
-    static int enemySpeed = 80;
-    static String enemyStatus = "Boss";
 
     // Player movesets
     static String[] attackMoveset = {"Slash", "Stab", "Fireball", "Thunder"};
@@ -26,37 +17,39 @@ public class Combat {
     static String[] potionMoveset = {"Small Potion", "Medium Potion", "Large Potion", "Mega Potion"};
     static int[] potionHealAmounts = {10, 20, 30, 40};
 
-    // Enemy movesets
-    static String[] enemyMoveset = {"Slash", "Stab", "Heal", "Quick Step"};
-    static int[] enemyAttackDamageMoveset = {8, 10, 0, 0};
-    static int[] enemyHealAmounts = {0, 0, 15, 0};
-    static int[] enemySpeedBuff = {0, 0, 0, 20};
+    // Enemy (Monster)
+    static Entity enemy;
 
     static Scanner scanner = new Scanner(System.in);
 
     public static void mainCombat(Room room) {
-        // Main battle loop: continues until one side's HP drops to 0
-        while (playerHp > 0 && enemyHp > 0) {
+        enemy = Room.getRandomMonster(int getRoomNumber - 1); // randomly pick a monster
+
+        // Main battle loop
+        while (playerHp > 0 && enemy.hp > 0) {
             displayBattleScreen();
             playerTurn();
-            if (enemyHp <= 0) {
-                System.out.println("\nEnemy " + enemyName + " is defeated! You win!");
-                Main.map.clearRoom(room.getRoomNumber()-1);
+
+            if (enemy.hp <= 0) {
+                System.out.println("\nEnemy " + enemy.name + " is defeated! You win!");
+                Main.map.clearRoom(room.getRoomNumber() - 1);
                 Main.showGame();
                 break;
             }
+
             enemyTurn();
+
             if (playerHp <= 0) {
                 System.out.println("\nYou have been defeated. Room clear.");
-                //end battle, here you can call what room the player cleared and like what's next
                 break;
             }
+
             System.out.println("\n--------------------- End of Turn ---------------------\n");
         }
+
         scanner.close();
     }
 
-    // Displays the current status of both player and enemy
     private static void displayBattleScreen() {
         System.out.println("======================= Battle ========================\n");
         System.out.println("Player: " + playerName);
@@ -64,13 +57,12 @@ public class Combat {
         System.out.println("MP: " + playerMp + "/" + playerMaxMp);
         System.out.println("Speed: " + playerSpeed + "\n");
 
-        System.out.println("Enemy: " + enemyName);
-        System.out.println("HP: " + enemyHp + "/" + enemyMaxHp);
-        System.out.println("Enemy Speed: " + enemySpeed);
-        System.out.println("Status: " + enemyStatus + "\n");
+        System.out.println("Enemy: " + enemy.name);
+        System.out.println("HP: " + enemy.hp + "/" + enemy.maxHp);
+        System.out.println("Speed: " + enemy.speed);
+        System.out.println("Status: " + enemy.status + "\n");
     }
 
-    // Processes the player's turn and available options
     private static void playerTurn() {
         System.out.println("1. Attack    2. Potion");
         System.out.print("\nWhat option would you like to do?: ");
@@ -90,7 +82,6 @@ public class Combat {
         }
     }
 
-    // Handles the player attack move
     private static void handleAttack() {
         System.out.println("\nChoose an attack move:");
         for (int i = 0; i < attackMoveset.length; i++) {
@@ -105,22 +96,21 @@ public class Combat {
             System.out.println("Invalid attack option, defaulting to the first move.");
             attackOption = 1;
         }
-        int damage = attackDamageMoveset[attackOption - 1];
 
-        // Using player's speed as the hit chance
+        int damage = attackDamageMoveset[attackOption - 1];
         int hitChance = (int) (Math.random() * 100) + 1;
+
         if (hitChance <= playerSpeed) {
             System.out.println("\nYou used " + attackMoveset[attackOption - 1] + " and dealt " + damage + " damage!");
-            enemyHp -= damage;
-            if (enemyHp < 0) {
-                enemyHp = 0;
+            enemy.hp -= damage;
+            if (enemy.hp < 0) {
+                enemy.hp = 0;
             }
         } else {
             System.out.println("\nYour attack missed!");
         }
     }
 
-    // Handles the player potion move
     private static void handlePotion() {
         System.out.println("\nChoose a potion:");
         for (int i = 0; i < potionMoveset.length; i++) {
@@ -135,6 +125,7 @@ public class Combat {
             System.out.println("Invalid potion option, defaulting to the first potion.");
             potionChoice = 1;
         }
+
         int healAmount = potionHealAmounts[potionChoice - 1];
         System.out.println("\nYou used " + potionMoveset[potionChoice - 1] + " and healed " + healAmount + " HP!");
         playerHp += healAmount;
@@ -143,31 +134,31 @@ public class Combat {
         }
     }
 
-    // Processes the enemy's turn with randomized move selection
     private static void enemyTurn() {
         System.out.println("\nEnemy's turn!");
-        int enemyMove = (int) (Math.random() * enemyMoveset.length) + 1;
-        System.out.println("Enemy uses " + enemyMoveset[enemyMove - 1] + "!");
+        int enemyMove = new Random().nextInt(enemy.moveset.length);
+        System.out.println("Enemy uses " + enemy.moveset[enemyMove] + "!");
 
-        // Process move based on enemy action
-        if (enemyMove == 1 || enemyMove == 2) {
-            int enemyDamage = enemyAttackDamageMoveset[enemyMove - 1];
+        if (enemy.damage[enemyMove] > 0) {
+            int enemyDamage = enemy.damage[enemyMove];
             System.out.println("It deals " + enemyDamage + " damage to you!");
             playerHp -= enemyDamage;
             if (playerHp < 0) {
                 playerHp = 0;
             }
-        } else if (enemyMove == 3) {
-            int enemyHeal = enemyHealAmounts[enemyMove - 1];
-            System.out.println("Enemy heals for " + enemyHeal + " HP!");
-            enemyHp += enemyHeal;
-            if (enemyHp > enemyMaxHp) {
-                enemyHp = enemyMaxHp;
+        } else if (enemy.heal[enemyMove] > 0) {
+            int heal = enemy.heal[enemyMove];
+            System.out.println("Enemy heals for " + heal + " HP!");
+            enemy.hp += heal;
+            if (enemy.hp > enemy.maxHp) {
+                enemy.hp = enemy.maxHp;
             }
-        } else if (enemyMove == 4) {
-            int buff = enemySpeedBuff[enemyMove - 1];
-            enemySpeed += buff;
+        } else if (enemy.speedBuff[enemyMove] > 0) {
+            int buff = enemy.speedBuff[enemyMove];
+            enemy.speed += buff;
             System.out.println("Enemy increases its speed by " + buff + "!");
+        } else {
+            System.out.println("Enemy did something... mysterious!");
         }
     }
 }

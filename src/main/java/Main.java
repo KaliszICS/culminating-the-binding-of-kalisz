@@ -3,24 +3,26 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static String name;
 	public static void main(String args[]) {
 		mainMenu();
 	}
 
-	//INTERNET HELP (https://github.com/karlasophiacruz/p3-softwareproject-refactoried/blob/9e01fb2e424f91121c1b64e6328e8450227d02d5/payroll/src/app/AuxFunctions.java)
+	// INTERNET HELP
+	// (https://github.com/karlasophiacruz/p3-softwareproject-refactoried/blob/9e01fb2e424f91121c1b64e6328e8450227d02d5/payroll/src/app/AuxFunctions.java)
 	public static void clearConsole() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			if (System.getProperty("os.name").contains("Windows")) {
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			} else {
+				new ProcessBuilder("clear").inheritIO().start().waitFor();
+			}
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 	static String name;
+
 	public static void mainMenu() {
 		clearConsole();
 		Scanner scanner = new Scanner(System.in);
@@ -85,14 +87,7 @@ public class Main {
 
 	public static void showGame() {
 		clearConsole();
-		Map map = new Map();
 		map.print();
-	}
-
-	public static void startCombat() {
-		clearConsole();
-		Combat combat = new Combat();
-		combat.mainCombat();
 	}
 
 }
