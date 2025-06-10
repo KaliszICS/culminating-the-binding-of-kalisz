@@ -79,6 +79,7 @@ public class Map {
     public void printOptions() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(" 1.SHOP\n 2.INVENTORY\n 3.Continue");
+        System.out.println("\nPlayer Gold: " + Combat.playerGold);
         boolean running = true;
         while (running) {
             System.out.print("\nType a choice: ");
@@ -139,6 +140,7 @@ public class Map {
             }
         }
         currentRoom = unlockedRooms.get(option-1);
+        Main.clearConsole();
         Combat.mainCombat(currentRoom);
 }
 }

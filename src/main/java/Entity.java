@@ -8,9 +8,13 @@ public class Entity {
     int[] damage;
     int[] heal;
     int[] speedBuff;
+    int gold;
 
-    public Entity(String name, int maxHp, int speed, String status,
-                  String[] moveset, int[] damage, int[] heal, int[] speedBuff) {
+    public Entity(int gold) {
+        this.gold = gold;
+    }
+
+    public Entity(String name, int maxHp, int speed, String status, String[] moveset, int[] damage, int[] heal, int[] speedBuff) {
         this.name = name;
         this.maxHp = maxHp;
         this.hp = maxHp;
@@ -89,6 +93,10 @@ public class Entity {
 
     public void setSpeedBuff(int[] speedBuff) {
         this.speedBuff = speedBuff;
+    }
+
+    public void gold(int gold) {
+        this.gold = gold;
     }
 
     public void scaleStats(double multiplier) {

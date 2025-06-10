@@ -81,6 +81,7 @@ public class Main {
 				System.out.print("\nINVALID INPUT PLEASE TRY AGAIN");
 			}
 		}
+		scanner.close();
 	}
 
 	static Map map = new Map();
@@ -88,6 +89,7 @@ public class Main {
 	public static void showGame() {
 		clearConsole();
 		map.print();
+		System.out.println("\nPlayer Gold: " + Combat.playerGold);
 	}
 
 }

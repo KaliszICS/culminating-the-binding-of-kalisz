@@ -4,18 +4,20 @@ import java.util.Random;
 public class Combat {
     // Player attributes
     static String playerName = Main.name;
-    static int playerHp = 100;
+    static int playerHp = 50000;
     static int playerMaxHp = 100;
     static int playerMp = 100;
     static int playerMaxMp = 100;
     static int playerSpeed = 500;
+    static int playerGold = 0;
 
     // Player movesets
-    static String[] attackMoveset = {"Slash", "Stab", "Fireball", "Thunder"};
-    static int[] attackDamageMoveset = {5, 8, 9, 300};
+    static String[] attackMoveset = { "Slash", "Stab", "Fireball", "Thunder" };
+    static int[] attackDamageMoveset = { 5, 8, 9, 100 };
+    static int[] mpDeduction = { 0, 0, 100, 15 };
 
-    static String[] potionMoveset = {"Small Potion", "Medium Potion", "Large Potion", "Mega Potion"};
-    static int[] potionHealAmounts = {10, 20, 30, 40};
+    static String[] potionMoveset = { "Small Potion", "Medium Potion", "Large Potion", "Mega Potion" };
+    static int[] potionHealAmounts = { 10, 20, 30, 40 };
 
     // Enemy (Monster)
     static Entity enemy;
@@ -23,7 +25,7 @@ public class Combat {
     static Scanner scanner = new Scanner(System.in);
 
     public static void mainCombat(Room room) {
-        enemy = Room.getRandomMonster(int getRoomNumber - 1); // randomly pick a monster
+        enemy = Room.getRandomMonster(room.getRoomNumber());
 
         // Main battle loop
         while (playerHp > 0 && enemy.hp > 0) {
@@ -32,9 +34,22 @@ public class Combat {
 
             if (enemy.hp <= 0) {
                 System.out.println("\nEnemy " + enemy.name + " is defeated! You win!");
+                int goldReward = enemy.maxHp / 2;
+                playerGold += goldReward;
+                System.out.println("\nYou earned " + goldReward + " gold! Total Gold: " + playerGold);
                 Main.map.clearRoom(room.getRoomNumber() - 1);
-                Main.showGame();
-                break;
+                boolean running = true;
+                while (running) {
+                    System.out.print("Type \"Exit\" to leave the room: ");
+                    String choiceOption = scanner.nextLine();
+                    if (choiceOption.equalsIgnoreCase("exit")) {
+                        running = false;
+                        Main.showGame();
+                        break;
+                    } else {
+                        System.out.print("\nINVALID INPUT PLEASE TRY AGAIN");
+                    }
+                }
             }
 
             enemyTurn();
@@ -85,7 +100,11 @@ public class Combat {
     private static void handleAttack() {
         System.out.println("\nChoose an attack move:");
         for (int i = 0; i < attackMoveset.length; i++) {
-            System.out.print((i + 1) + ". " + attackMoveset[i] + "   ");
+            if (mpDeduction[i] > 0) {
+                System.out.print((i + 1) + ". " + attackMoveset[i] + " (MP Cost: " + mpDeduction[i] + ")   ");
+            } else {
+                System.out.print((i + 1) + ". " + attackMoveset[i] + "   ");
+            }
         }
         System.out.println();
         System.out.print("Select your move (1-4): ");
@@ -97,11 +116,22 @@ public class Combat {
             attackOption = 1;
         }
 
+        int mpCost = mpDeduction[attackOption - 1];
+
+        if (playerMp < mpCost) {
+            System.out.println("\n\u001B[31mNot enough MP to use " + attackMoveset[attackOption - 1] + "! Turn lost.\u001B[0m");
+            return;
+        }
+
+        playerMp -= mpCost; // Deduct MP cost
         int damage = attackDamageMoveset[attackOption - 1];
         int hitChance = (int) (Math.random() * 100) + 1;
 
         if (hitChance <= playerSpeed) {
             System.out.println("\nYou used " + attackMoveset[attackOption - 1] + " and dealt " + damage + " damage!");
+            if (mpCost > 0) {
+                System.out.println("MP deducted: " + mpCost + " | Remaining MP: " + playerMp);
+            }
             enemy.hp -= damage;
             if (enemy.hp < 0) {
                 enemy.hp = 0;
