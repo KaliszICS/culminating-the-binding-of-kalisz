@@ -19,7 +19,7 @@ public class Main {
             e.printStackTrace();
         }
     }
-
+	static String name;
 	public static void mainMenu() {
 		clearConsole();
 		Scanner scanner = new Scanner(System.in);
@@ -83,5 +83,9 @@ public class Main {
 	public static void showGame() {
 		clearConsole();
 		System.out.println("Waiting for jerry to finish...");
+	}
+
+	public static void startCombat(){
+		
 	}
 }

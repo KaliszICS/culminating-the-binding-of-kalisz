@@ -34,7 +34,7 @@ public class Combat {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void mainCombat() {
+    public static void mainCombat(Room room) {
         // Main battle loop: continues until one side's HP drops to 0
         while (playerHp > 0 && enemyHp > 0) {
             displayBattleScreen();
