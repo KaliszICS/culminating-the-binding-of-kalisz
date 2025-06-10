@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 
+	public static String name;
 	public static void main(String args[]) {
 		mainMenu();
 	}
@@ -84,7 +85,14 @@ public class Main {
 
 	public static void showGame() {
 		clearConsole();
+		Map map = new Map();
 		map.print();
+	}
+
+	public static void startCombat() {
+		clearConsole();
+		Combat combat = new Combat();
+		combat.mainCombat();
 	}
 
 }
