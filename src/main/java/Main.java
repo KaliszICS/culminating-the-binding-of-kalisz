@@ -80,12 +80,11 @@ public class Main {
 		}
 	}
 
+	static Map map = new Map();
+
 	public static void showGame() {
 		clearConsole();
-		System.out.println("Waiting for jerry to finish...");
+		map.print();
 	}
 
-	public static void startCombat(){
-		
-	}
 }

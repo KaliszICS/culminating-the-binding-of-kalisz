@@ -27,11 +27,11 @@ public class Map {
         this.unlockedRooms.add(this.currentRoom);
     }
 
-    public void clearRooom(int roomNumber) {
+    public void clearRoom(int roomNumber) {
         this.rooms[roomNumber].setClear();
         for(int i = 0; i < unlockedRooms.size(); i++){
             if(roomNumber == unlockedRooms.get(i).getRoomNumber()){
-                unlockedRooms.remove(i);
+                this.unlockedRooms.remove(i);
             }
         }
     }

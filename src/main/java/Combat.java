@@ -21,7 +21,7 @@ public class Combat {
 
     // Player movesets
     static String[] attackMoveset = {"Slash", "Stab", "Fireball", "Thunder"};
-    static int[] attackDamageMoveset = {5, 8, 9, 30};
+    static int[] attackDamageMoveset = {5, 8, 9, 300};
 
     static String[] potionMoveset = {"Small Potion", "Medium Potion", "Large Potion", "Mega Potion"};
     static int[] potionHealAmounts = {10, 20, 30, 40};
@@ -41,7 +41,7 @@ public class Combat {
             playerTurn();
             if (enemyHp <= 0) {
                 System.out.println("\nEnemy " + enemyName + " is defeated! You win!");
-                room.setClear();
+                Main.map.clearRoom(room.getRoomNumber()-1);
                 Main.showGame();
                 break;
             }

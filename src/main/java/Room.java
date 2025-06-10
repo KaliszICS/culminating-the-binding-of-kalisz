@@ -44,6 +44,10 @@ public class Room {
           this.isCleared = true;
         }
 
+        public void setLocked(){
+          this.isUnlocked = false;
+        }
+
         public void setUnlocked(){
           this.isUnlocked = true;
         }
