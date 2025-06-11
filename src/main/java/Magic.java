@@ -1,8 +1,8 @@
 public class Magic extends Weapon{
 
+    
     public Magic(String name, int damage, int mpCost){
         super(name, damage, mpCost);
-
     }
 
     
