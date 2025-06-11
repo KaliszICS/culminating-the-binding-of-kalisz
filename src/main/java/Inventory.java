@@ -6,7 +6,8 @@ public class Inventory {
     private Potion[] potions;
     private int[] potionCount;
     private int[] potionModNum;
-
+    private Arraylist<Weapon> unequipped;
+    private Weapon[] equipped;
     // private Armor[] armors;
     public Inventory() {
         String[] potionNames = new String[] { "Small Healing Potion", "Medium Healing Potion", "Large Healing Potion",
@@ -35,6 +36,9 @@ public class Inventory {
 
         String[] weaponNames = new String[] {};
         String[] weaponDamage = new String[] {};
+        int weaponSlots = 4;
+        this.equipped = new Weapon[weaponSlots];
+        
         }
     }
 
@@ -134,6 +138,21 @@ public class Inventory {
     }
 
     public void weaponMenu(){
-        System.out.println("What would you like to equip");
+        System.out.println("\nWhat would you like to equip");
+        for (int i = 0; i < unequipped.size - 1; i++) {
+                System.out.print("\n" + (i + 1) + ". ");
+                this.unequipped.get(i).weaponDesc();
     }
+        System.out.print("\n" + (unequipped.size) + ". Return");
+        System.out.println("\nCurrent Weapons");
+       for (int i = 0; i < equipped.length; i++){
+            System.out.print("\nSlot " + (i + 1) + ". ");
+        if(equipped[i]==null){
+            System.out.print("Empty Slot");
+        }
+        else{
+            equipped[i].weaponDesc();
+        }
+    }
+}
 }
