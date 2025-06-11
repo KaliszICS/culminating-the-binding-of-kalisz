@@ -10,6 +10,7 @@ public class Casino {
 
         if (gold <= 0) {
             System.out.println("You are too broke to bet. Come back when you have gold.");
+            Main.showGame();
             return;
         }
 
