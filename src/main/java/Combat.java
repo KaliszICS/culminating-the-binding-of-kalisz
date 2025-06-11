@@ -93,8 +93,6 @@ public class Combat {
                 break;
             }
         }
-        //goes to main menu if loss
-        Main.mainMenu();
     }
 
     /**
