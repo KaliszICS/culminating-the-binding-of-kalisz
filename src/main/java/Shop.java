@@ -151,7 +151,7 @@ public class Shop {
             option = input.nextInt();
             input.nextLine();
             if (option > 0 && option < magicWeapons.length) {
-                if (magicCost[option - 1] > Main.player.getGold()) {
+                if (magicCost[option - 1] > Combat.playerGold) {
                     System.out.println("You do not enough money");
                 } else {
                     Main.inventory.addWeapon(magicWeapons[option-1]);
@@ -195,7 +195,7 @@ public class Shop {
             option = input.nextInt();
             input.nextLine();
             if (option > 0 && option < meleeWeapons.length) {
-                if (meleeCost[option - 1] > Main.player.getGold()) {
+                if (meleeCost[option - 1] > Combat.playerGold) {
                     System.out.println("You do not enough money");
                 } else {
                     Main.inventory.addWeapon(meleeWeapons[option-1]);
@@ -239,11 +239,11 @@ public class Shop {
             option = input.nextInt();
             input.nextLine();
             if (option > 0 && option < this.potions.length) {
-                if (potionCost[option - 1] > Main.player.getGold()) {
+                if (potionCost[option - 1] > Combat.playerGold) {
                     System.out.println("You do not enough money");
                 } else {
                     Main.inventory.addPotion(option-1, 1);
-                    Main.player.subtractGold(potionCost[option-1]);
+                    Combat.playerGold -= (potionCost[option-1]);
                     running = false;
                 }
             } else if (option == this.potions.length+1) {
@@ -271,15 +271,14 @@ public class Shop {
                 System.out.print("\n1. Yes(+10Maxhp, -25 gold");
                 System.out.print("\n2. No");
                 }
-                System.out.println("\n" + (potions.length+1) + ". Exit:");
                 option = input.nextInt();
                 input.nextLine();
                 if (option == 1) {
-                    if (25 > Main.player.getGold()) {
+                    if (25 > Combat.playerGold) {
                         System.out.println("You do not enough money");
                     } else {
                         Main.player.addMaxHp(10);
-                        Main.player.subtractGold(potionCost[option-1]);
+                        Combat.playerGold -= 25;
                         running = false;
                     }
                 } else if (option == 2) {

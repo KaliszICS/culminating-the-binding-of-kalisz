@@ -44,7 +44,7 @@ public class Casino {
 
             playing = askToPlayAgain(s);
         }
-
+        Combat.playerGold = gold;
         System.out.println("\nReturning to the main menu...");
         Main.showGame();
         s.close();
