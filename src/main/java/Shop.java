@@ -1,4 +1,11 @@
+/**
+	* The Shop class allows for the creation of a Shop for the player to purchase items from. By default, it creates an array of potions that will be stored and a parallel array noting the cost of the potions. The same is done for Magic Weapons and Melee weapons. You can pay gold to buy an armor upgrade, increasing your max hp. Lastly, you can also access the casino from this class.
+	* @author Jerry Zhu, Marcus Wong
+	* @version 1.0.1
+	*/
+
 import java.util.Scanner;
+
 
 public class Shop {
     
@@ -10,7 +17,9 @@ public class Shop {
     private int[] magicCost;
     private int[] meleeCost;
 
-
+    /**
+     * 
+     */
     public Shop() {
         String[] magicNames = new String[]{"Fire Staff", "Wind Staff", "Lightning Staff", "Ice Staff"};
         int[] magicDmg = new int[]{70, 50, 80, 60};
@@ -33,7 +42,7 @@ public class Shop {
 
 
         this.potions = Main.inventory.getPotions();
-        this.potionCost = new int[] {15, 30, 60, 120, 40, 40};
+        this.potionCost = new int[] {15, 30, 45, 60, 20, 40};
 
 
     }
@@ -59,7 +68,7 @@ public class Shop {
             }
             option = input.nextInt();
             input.nextLine();
-            if (option > 0 && option <= 3) {
+            if (option > 0 && option <= 4) {
                 running = false;
                 if (option == 1) {
                     running = false;

@@ -21,7 +21,7 @@ public class Combat {
     static int playerMaxMp = 100;
     static int playerSpeed = 60;
     static int tempPlayerSpeed = playerSpeed; //stores base speed to restore after buffs/debuffs
-    static int playerGold = 0;
+    static int playerGold = 50;
 
     //Potions data pulled from inventory
     static String[] potionMoveset = inventory.getPotionNames();
@@ -88,11 +88,13 @@ public class Combat {
             
             //If player died, handle defeat.
             if (playerHp <= 0) {
-                System.out.println("\nYou have been defeated. Room clear.");
+                System.out.println("\nYou have been defeated. Game over.");
                 playerSpeed = tempPlayerSpeed;
                 break;
             }
         }
+        //goes to main menu if loss
+        Main.mainMenu();
     }
 
     /**

@@ -21,10 +21,10 @@ public class Inventory {
     public Inventory() {
         this.potionNames = new String[] { "Small Healing Potion", "Medium Healing Potion", "Large Healing Potion",
                 "Mega Healing Potion", "Speed Potion", "Mana Potion" };
-        this.potionEffects = new String[] { "Restores 10 Hp", "Restores 20 Hp", "Restores 30 Hp", "Restores 40 Hp",
+        this.potionEffects = new String[] { "Restores 30 Hp", "Restores 40 Hp", "Restores 40 Hp", "Restores 50 Hp",
                 "Increases speed by 20 for the rest of combat", "Restores 50 Mp" };
         this.potions = new Potion[potionNames.length];
-        this.potionModNum = new int[] { 10, 20, 30, 40, 20, 50};
+        this.potionModNum = new int[] { 30, 40, 50, 60, 20, 50};
         this.potionCount = new int[potionNames.length];
         //make the potions
         for (int i = 0; i < potionNames.length; i++) {

@@ -24,52 +24,66 @@ public class Main {
         }
     }
 	
+	
+	static Map map = new Map();
+	
 	static Inventory inventory = new Inventory();
-
-	static String name;
-
+	
+	
 	public static void mainMenu() {
 		clearConsole();
 		Scanner scanner = new Scanner(System.in);
 		boolean running = true;
-
+		
 		while (running) {
 			System.out.println("==== The Binding of Kalisz ====\n");
 			System.out.println("1. Start Game");
 			System.out.println("2. Leaderboard");
 			System.out.println("3. Exit\n");
 			System.out.print("Enter your choice (1-3): ");
-
+			while(!(scanner.hasNextInt())){
+			scanner.nextLine();
+			System.out.println("\nInvalid input! Please choose a valid nuber.");
+			System.out.println("1. Start Game");
+			System.out.println("2. Leaderboard");
+			System.out.println("3. Exit\n");
+			System.out.print("Enter your choice (1-3): ");
+			}
+			
 			int choice = scanner.nextInt();
 			scanner.nextLine();
-
+			
 			switch (choice) {
 				case 1:
-					System.out.print("Choose a name: ");
-					name = scanner.nextLine();
-					startTime = System.currentTimeMillis();
-					showGame();
-					running = false;
-					break;
+				System.out.print("Choose a name: ");
+				name = scanner.nextLine();
+				startTime = System.currentTimeMillis();
+				showGame();
+				running = false;
+				break;
 				case 2:
-					showLeaderBoard();
-					running = false;
-					break;
-				case 3:
+				showLeaderBoard();
+				running = false;
+				break;
+					case 3:
 					System.out.println("Exiting the game...");
 					running = false;
 					break;
 				default:
-					System.out.println("Invalid choice! Please enter a number between 1 and 3.");
+				System.out.println("Invalid choice! Please enter a number between 1 and 3.");
 					break;
+				}
 			}
+			
+			scanner.close();
 		}
-
-		scanner.close();
-	}
-
-	public static void showLeaderBoard() {
-		clearConsole();
+		
+		static String name;
+		static Shop shop = new Shop();
+		static Player player = new Player(name, 100, 100, 70, null, null, null, null, null, null, 0);
+		
+		public static void showLeaderBoard() {
+			clearConsole();
 		Leaderboard leaderboard = new Leaderboard("ScoreRecord.txt");
 		leaderboard.sortRecords();
 		leaderboard.displayRecords();
@@ -89,11 +103,6 @@ public class Main {
 		}
 		scanner.close();
 	}
-	static Shop shop = new Shop();
-
-	static Player player = new Player(name, 100, 100, 70, null, null, null, null, null, null, 0);
-
-	static Map map = new Map();
 
 	public static void showGame() {
 		clearConsole();
