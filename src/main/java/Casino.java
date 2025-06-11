@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * 
+ */
 public class Casino {
     public static void mainCasino() {
         Scanner s = new Scanner(System.in);
