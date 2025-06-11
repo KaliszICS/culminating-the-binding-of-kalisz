@@ -5,6 +5,6 @@ public class Melee extends Weapon {
 
 @Override
     public void weaponDesc(){
-        System.out.print(this.name + " Damage: " + this.damage);
+        System.out.print(this.name + ": Damage: " + this.damage);
     }
 }

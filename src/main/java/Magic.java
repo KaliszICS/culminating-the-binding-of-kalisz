@@ -8,6 +8,6 @@ public class Magic extends Weapon{
     
     @Override
     void weaponDesc() {
-        System.out.println(this.name + " Damage: " + this.damage + " Cost: " + mpCost +"mp.");
+        System.out.println(this.name + ": Damage: " + this.damage + " Cost: " + mpCost +"mp.");
     }
 }

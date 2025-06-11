@@ -155,6 +155,7 @@ public class Shop {
                     System.out.println("You do not enough money");
                 } else {
                     Main.inventory.addWeapon(magicWeapons[option-1]);
+                    Combat.playerGold -= magicCost[option-1];
                     running = false;
                     Main.showGame();
                 }
@@ -199,6 +200,7 @@ public class Shop {
                     System.out.println("You do not enough money");
                 } else {
                     Main.inventory.addWeapon(meleeWeapons[option-1]);
+                    Combat.playerGold -= meleeCost[option-1];
                     running = false;
                     Main.showGame();
                 }
