@@ -10,7 +10,6 @@ public class Inventory {
     private String[] potionEffects;
     private ArrayList<Weapon> unequipped;
     private Weapon[] equipped;
-    private Armor[] armors;
     public Inventory() {
         this.potionNames = new String[] { "Small Healing Potion", "Medium Healing Potion", "Large Healing Potion",
                 "Mega Healing Potion", "Speed Potion", "Mana Potion" };
@@ -29,15 +28,8 @@ public class Inventory {
             }
         }
 
-        String[] armorNames = new String[] { "Leather Armor", "Copper Armor", "Bronze Armor", "Chainmail Armor",
-                "Iron Armor", "Gold Armor", "Diamond Armor", "Platinum Armor", "Mithril Armor", "Obamium" };
-        int increment = 10;
-        this.armors = new Armor[armorNames.length];
-        for (int i = 0; i < armorNames.length; i++) {
-            Armor a = new Armor(armorNames[i], (i+1)*increment, false);
-            this.armors[i] = a;
-            
-            armors[0].setHasArmor(true);
+        
+        
             Weapon stick = new Melee("Stick", 200);            
             Weapon woodenSword = new Melee("Wooden Sword", 20);
             this.unequipped = new ArrayList<Weapon>();
@@ -137,15 +129,6 @@ public class Inventory {
     }
 
 
-    public int getDefense(){
-        int defense = 0;
-        for(int i = this.armors.length - 1; i >= 0; i--){
-            if(armors[i].hasArmor()){
-                return armors[i].getDefense();
-            }
-        }
-        return defense;
-    }
 
     public void inventoryNav() {
         boolean running = true;
