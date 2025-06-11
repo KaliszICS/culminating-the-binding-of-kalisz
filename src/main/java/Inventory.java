@@ -31,7 +31,7 @@ public class Inventory {
         
         
             Weapon stick = new Melee("Stick", 200);            
-            Weapon woodenSword = new Melee("Wooden Sword", 20);
+            Weapon woodenSword = new Melee("Wooden Sword", 2000);
             this.unequipped = new ArrayList<Weapon>();
             this.unequipped.add(stick);
             this.equipped = new Weapon[] {woodenSword, null, null, null};

@@ -1,5 +1,2 @@
-"Test1": "0"
-"Test2": "9"
-"Test3": "8"
-"Test4": "7"
-"Test5": "6"
+"Best Player": "1"
+

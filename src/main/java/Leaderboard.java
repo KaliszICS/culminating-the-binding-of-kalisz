@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Leaderboard {
     private ArrayList<ScoreRecord> records;
@@ -9,6 +7,21 @@ public class Leaderboard {
     public Leaderboard(String filePath) {
         records = readScores(filePath);
     }
+
+    public static void saveScore(String playerName, long totalTime) {
+        try (FileWriter fileWriter = new FileWriter("ScoreRecord.txt", true);
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+
+            printWriter.println("\"" + playerName + "\": \"" + totalTime + "\"");
+
+            System.out.println("Score saved successfully!");
+
+        } catch (IOException e) {
+            System.err.println("An error occurred while saving the score.");
+            e.printStackTrace();
+        }
+    }
+
 
     private ArrayList<ScoreRecord> readScores(String filePath) {
         ArrayList<ScoreRecord> list = new ArrayList<>();

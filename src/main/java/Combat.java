@@ -10,7 +10,7 @@ public class Combat {
     static int playerMaxHp = 50000;
     static int playerMp = 100;
     static int playerMaxMp = 100;
-    static int playerSpeed = 60;
+    static int playerSpeed = 100;
     static int tempPlayerSpeed = playerSpeed;
     static int playerGold = 0;
 
@@ -34,6 +34,13 @@ public class Combat {
             
             if (enemy.hp <= 0) {
                 System.out.println("\nEnemy " + enemy.name + " is defeated! You win!");
+                if (room.getRoomNumber() == 32) {
+                    Main.endTime = System.currentTimeMillis();
+                    long totalTime = (Main.endTime - Main.startTime) / 1000;
+                    System.out.println("\n\u001B[33mYou completed the game in " + totalTime + " seconds!\u001B[0m");
+                    Leaderboard.saveScore(Main.name, totalTime);
+                    return;
+                }
                 int goldReward = enemy.maxHp / 2;
                 playerGold += goldReward;
                 System.out.println("\nYou earned " + goldReward + " gold! Total Gold: " + playerGold);

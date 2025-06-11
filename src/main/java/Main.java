@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class Main {
 
+	static long startTime;
+	static long endTime;
+
 	public static void main(String args[]) {
 		mainMenu();
 	}
@@ -44,6 +47,7 @@ public class Main {
 				case 1:
 					System.out.print("Choose a name: ");
 					name = scanner.nextLine();
+					startTime = System.currentTimeMillis();
 					showGame();
 					running = false;
 					break;
@@ -93,8 +97,9 @@ public class Main {
 	public static void showGame() {
 		clearConsole();
 		map.print();
-		System.out.println("\nPlayer Gold: " + Combat.playerGold);
 	}
 
-
+	public static void endGame() {
+		clearConsole();
+	}
 }
