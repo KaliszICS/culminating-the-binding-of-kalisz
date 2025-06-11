@@ -4,7 +4,6 @@ public class ManaPotion extends Potion{
     }
 
     public void usePotion(){
-        Main.player.addMana(this.statMod);
     System.out.print("\nYou have used a " + super.name + ". Your speed inceasaes by " + statMod + ".");
     }
 }

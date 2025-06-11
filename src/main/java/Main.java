@@ -86,6 +86,8 @@ public class Main {
 		scanner.close();
 	}
 
+	static Player player = new Player(name, 100, 100, 70, null, null, null, null, null, null, 0);
+
 	static Map map = new Map();
 
 	public static void showGame() {

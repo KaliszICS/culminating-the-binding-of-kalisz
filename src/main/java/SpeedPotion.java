@@ -5,7 +5,6 @@ public class SpeedPotion extends Potion {
     }
 
     public void usePotion(){
-        Main.player.addSpeed(this.statMod);
-    System.out.print("\nYou have used a " + super.name + ". Your speed inceasaes by " + statMod + ".");
+        System.out.print("\nYou have used a " + super.name + ". Your speed inceasaes by " + statMod + ".");
     }
 }

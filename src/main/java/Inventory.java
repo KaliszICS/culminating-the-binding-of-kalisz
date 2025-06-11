@@ -6,23 +6,28 @@ public class Inventory {
     private Potion[] potions;
     private int[] potionCount;
     private int[] potionModNum;
+    private String[] potionNames;
+    private String[] potionEffects;
     private ArrayList<Weapon> unequipped;
     private Weapon[] equipped;
     private Armor[] armors;
     public Inventory() {
-        String[] potionNames = new String[] { "Small Healing Potion", "Medium Healing Potion", "Large Healing Potion",
-                "Mega Healing Potion", "Speed Potion" };
-        String[] potionEffects = new String[] { "Restores 10 Hp", "Restores 20 Hp", "Restores 30 Hp", "Restores 40 Hp",
-                "Increases speed by 20 for the rest of combat" };
+        this.potionNames = new String[] { "Small Healing Potion", "Medium Healing Potion", "Large Healing Potion",
+                "Mega Healing Potion", "Speed Potion", "Mana Potion" };
+        this.potionEffects = new String[] { "Restores 10 Hp", "Restores 20 Hp", "Restores 30 Hp", "Restores 40 Hp",
+                "Increases speed by 20 for the rest of combat", "Restores 50 Mp" };
         this.potions = new Potion[potionNames.length];
-        this.potionModNum = new int[] { 10, 20, 30, 40, 20};
+        this.potionModNum = new int[] { 10, 20, 30, 40, 20, 50};
         this.potionCount = new int[potionNames.length];
-        for (int i = 0; i < potionNames.length-1; i++) {
-            Potion p = new HealthPotion(potionNames[i], potionEffects[i], potionModNum[i]);
-            this.potions[i] = p;
+        for (int i = 0; i < potionNames.length; i++) {
+            if (i == 4) {
+                this.potions[i] = new SpeedPotion(potionNames[i], potionEffects[i], potionModNum[i]);
+            } else if (i == 5) {
+                this.potions[i] = new ManaPotion(potionNames[i], potionEffects[i], potionModNum[i]);
+            } else {
+                this.potions[i] = new HealthPotion(potionNames[i], potionEffects[i], potionModNum[i]);
+            }
         }
-            Potion p = new SpeedPotion(potionNames[potionNames.length-1],potionEffects[potionEffects.length-1], this.potionModNum[potions.length-1]);
-            this.potions[potions.length-1] = p;
 
         String[] ArmorNames = new String[] { "Leather Armor", "Copper Armor", "Bronze Armor", "Chainmail Armor",
                 "Iron Armor", "Gold Armor", "Diamond Armor", "Platinum Armor", "Mithril Armor", "Obamium" };
@@ -39,6 +44,32 @@ public class Inventory {
         int weaponSlots = 4;
         this.equipped = new Weapon[weaponSlots];
         
+        }
+    }
+
+    public String[] getPotionNames() {
+        return this.potionNames;
+    }
+
+    public String[] getPotionEffects() {
+        return this.potionEffects;
+    }
+
+    public Potion getPotion(int index) {
+        return this.potions[index];
+    }
+
+    public int[] getPotionModNum() {
+        return this.potionModNum;
+    }
+
+    public int getPotionCount(int index) {
+        return this.potionCount[index];
+    }
+
+    public void decreasePotionCount(int index) {
+        if (potionCount[index] > 0) {
+            potionCount[index]--;
         }
     }
 

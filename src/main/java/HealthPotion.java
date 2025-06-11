@@ -5,7 +5,6 @@ public class HealthPotion extends Potion{
     }
 public void usePotion(){
     System.out.print("\nYou have used a " + super.name + ". You heal " + statMod + " Hp.");
-    // Main.player.addHp(potionModNum[option-1]);
 }
 
 }

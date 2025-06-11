@@ -8,7 +8,7 @@ public class Casino {
         Random random = new Random();
         
         //player gold for now
-        int gold = 100;
+        int gold = Combat.playerGold;
 
         //this is for when player intial gold is under a dollar, after this statement -> return back to main menu
         if (gold <= 0) {

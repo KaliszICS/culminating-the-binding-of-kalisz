@@ -2,13 +2,16 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Combat {
+    static Inventory inventory = Main.inventory;
+
     // Player attributes
     static String playerName = Main.name;
     static int playerHp = 50000;
-    static int playerMaxHp = 100;
+    static int playerMaxHp = 50000;
     static int playerMp = 100;
     static int playerMaxMp = 100;
-    static int playerSpeed = 500;
+    static int playerSpeed = 60;
+    static int tempPlayerSpeed = playerSpeed;
     static int playerGold = 0;
 
     // Player movesets
@@ -16,10 +19,8 @@ public class Combat {
     static int[] attackDamageMoveset = { 5, 8, 9, 100 };
     static int[] mpDeduction = { 0, 0, 10, 15 };
 
-    static String[] potionMoveset = { "Small Potion", "Medium Potion", "Large Potion", "Mega Potion" };
-    static int[] potionHealAmounts = { 10, 20, 30, 40 };
-    static int[] potionSpeedAmounts = { 10, 20, 30, 40 };
-    static int[] potionMpAmounts = { 10, 20, 30, 40 };
+    static String[] potionMoveset = inventory.getPotionNames();
+    static int[] potionHealAmounts = inventory.getPotionModNum();
 
     // Enemy (Monster)
     static Entity enemy;
@@ -46,6 +47,7 @@ public class Combat {
                     String choiceOption = scanner.nextLine();
                     if (choiceOption.equalsIgnoreCase("exit")) {
                         running = false;
+                        playerSpeed = tempPlayerSpeed;
                         Main.showGame();
                         break;
                     } else {
@@ -61,6 +63,7 @@ public class Combat {
 
             if (playerHp <= 0) {
                 System.out.println("\nYou have been defeated. Room clear.");
+                playerSpeed = tempPlayerSpeed;
                 break;
             }
         }
@@ -120,7 +123,8 @@ public class Combat {
         int mpCost = mpDeduction[attackOption - 1];
 
         if (playerMp < mpCost) {
-            System.out.println("\n\u001B[31mNot enough MP to use " + attackMoveset[attackOption - 1] + "! Turn lost.\u001B[0m");
+            System.out.println(
+                    "\n\u001B[31mNot enough MP to use " + attackMoveset[attackOption - 1] + "! Turn lost.\u001B[0m");
             return;
         }
 
@@ -144,24 +148,59 @@ public class Combat {
 
     private static void handlePotion() {
         System.out.println("\nChoose a potion:");
+        inventory.addPotion(0, 1);
+        inventory.addPotion(4, 1);
+        inventory.addPotion(5, 1);
         for (int i = 0; i < potionMoveset.length; i++) {
-            System.out.print((i + 1) + ". " + potionMoveset[i] + "   ");
+            System.out.println((i + 1) + ". " + potionMoveset[i] + " - " + inventory.getPotionEffects()[i] +
+                    " (Count: " + inventory.getPotionCount(i) + ")");
         }
-        System.out.println();
-        System.out.print("Select a potion (1-4): ");
+        System.out.println((potionMoveset.length + 1) + ". Cancel");
+
+        System.out.print("Select a potion (1-" + (potionMoveset.length + 1) + "): ");
         int potionChoice = scanner.nextInt();
         scanner.nextLine();
 
-        if (potionChoice < 1 || potionChoice > potionMoveset.length) {
-            System.out.println("Invalid potion option, defaulting to the first potion.");
-            potionChoice = 1;
+        if (potionChoice < 1 || potionChoice > potionMoveset.length + 1) {
+            System.out.println("Invalid option. Turn skipped.");
+            return;
         }
 
-        int healAmount = potionHealAmounts[potionChoice - 1];
-        System.out.println("\nYou used " + potionMoveset[potionChoice - 1] + " and healed " + healAmount + " HP!");
-        playerHp += healAmount;
-        if (playerHp > playerMaxHp) {
-            playerHp = playerMaxHp;
+        if (potionChoice == potionMoveset.length + 1) {
+            System.out.println("Cancelled.\n");
+            playerTurn();
+            return;
+        }
+
+        int index = potionChoice - 1;
+        int count = inventory.getPotionCount(index);
+
+        if (count < 1) {
+            System.out.println("You don't have any of this potion left!");
+            return;
+        }
+
+        Potion chosenPotion = inventory.getPotion(index);
+
+        inventory.decreasePotionCount(index);
+
+        if (chosenPotion instanceof HealthPotion) {
+            int healAmount = potionHealAmounts[index];
+            playerHp += healAmount;
+            if (playerHp > playerMaxHp)
+                playerHp = playerMaxHp;
+        } else if (chosenPotion instanceof SpeedPotion) {
+            Main.inventory.getPotion(index).usePotion();
+            int buff = potionHealAmounts[index];
+            playerSpeed += buff;
+        } else if (chosenPotion instanceof ManaPotion){
+            int mpHealAmount = potionHealAmounts[index];
+            playerMp += mpHealAmount;
+            if (playerMp > playerMaxMp) {
+                playerMp = playerMaxMp;
+            }
+        } else {
+            System.out.println("You used an unknown potion. Nothing happened...");
         }
     }
 
