@@ -219,6 +219,7 @@ public class Inventory {
             System.out.print("\nWhat would you like to do: ");
             System.out.print("\n1. Use a potion");
             System.out.print("\n2. Swap Weapons");
+            System.out.print("\n3. Exit");
             //if user imput is not a integer
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -227,18 +228,23 @@ public class Inventory {
                 System.out.print("\nWhat would you like to do: ");
                 System.out.print("\n1. Use a potion");
                 System.out.print("\n2. Swap Weapons");
+                System.out.print("\n3. Exit");
             }
             option = input.nextInt();
             input.nextLine();
             //valid integer inputs
-            if (option > 0 && option <= 2) {
+            if (option > 0 && option <= 3) {
                 running = false;
                 if (option == 1) {
                     //open the potion screen
                     this.potionNav();
-                } else {
+                } else if(option == 2){
                     //open the weapon swaps screen
                     weaponMenu();
+                }
+                    //return to main choice page
+                else{
+                    Main.showGame();
                 }
             } else {
                 //integer inputs outside the valid range
