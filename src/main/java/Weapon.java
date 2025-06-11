@@ -3,10 +3,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 
-public class Weapon {
+abstract class Weapon {
     
-    String name;
-    int damage;
+    protected String name;
+    protected int damage;
 
     public Weapon (String name, int damage) {
         this.name = name;
@@ -14,9 +14,6 @@ public class Weapon {
     }
     public String getName() {
         return name;
-    }
-    public int getDamage() {
-        return damage;
     }
 
     public int getDamage() {
@@ -31,8 +28,8 @@ public class Weapon {
         this.damage = damage;
     }
 
-    int damageDealt = playerWeapon.getDamage();
-    System.out.println("You attack with " + playerWeapon.getName() + " and deal " + damageDealt + " damage!");
+    abstract void weaponDesc();
+
 }
 
 

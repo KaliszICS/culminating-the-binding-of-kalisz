@@ -2,7 +2,7 @@ public class Armor {
 
     private String name;
     private int defense;
-    private boolean check;
+    private boolean hasArmor;
 
     /**
      * 
@@ -10,10 +10,10 @@ public class Armor {
      * @param defense
      * @param check to check whether or not the player has a armor
      */
-    public Armor(String name, int defense) {
+    public Armor(String name, int defense, boolean hasArmor) {
         this.name = name;
         this.defense = defense;
-        this.check = false;
+        this.hasArmor = hasArmor;
     }
 
     public String getName() {
@@ -24,8 +24,8 @@ public class Armor {
         return this.defense;
     }
 
-    public boolean getCheck() {
-        return this.check;
+    public boolean hasArmor() {
+        return this.hasArmor;
     }
 
     public void setName(String name) {
@@ -36,8 +36,8 @@ public class Armor {
         this.defense = defense;
     }
 
-    public void setCheck(boolean check) {
-        this.check = check;
+    public void setHasArmor(boolean hasArmor) {
+        this.hasArmor = hasArmor;
     }
 
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 abstract class Potion {
     protected String name;
     protected String effect;
@@ -8,27 +7,9 @@ abstract class Potion {
 this.name = name;
 this.effect = effect;
 this.statMod = statMod;
-=======
-public class Potion {
-
-    private String name;
-    private String effect;
-
-    public Potion(String name, String effect) {
-        this.name = name;
-        this.effect = effect;
->>>>>>> 266e02b (added need to fix Casino)
     }
 
-    public String getName() {
-        return this.name;
-    }
 
-    public String getEffect() {
-        return this.effect;
-    }
-
-<<<<<<< HEAD
 public void potionDesc(){
     System.out.print(this.name + ": " + this.effect);
 }
@@ -46,13 +27,4 @@ public String getName(){
 }
 
 
-=======
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEffect(String effect) {
-        this.effect = effect;
-    }
->>>>>>> 266e02b (added need to fix Casino)
 }

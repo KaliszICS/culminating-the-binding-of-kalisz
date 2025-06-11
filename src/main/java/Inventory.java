@@ -6,9 +6,9 @@ public class Inventory {
     private Potion[] potions;
     private int[] potionCount;
     private int[] potionModNum;
-    private Arraylist<Weapon> unequipped;
+    private ArrayList<Weapon> unequipped;
     private Weapon[] equipped;
-    // private Armor[] armors;
+    private Armor[] armors;
     public Inventory() {
         String[] potionNames = new String[] { "Small Healing Potion", "Medium Healing Potion", "Large Healing Potion",
                 "Mega Healing Potion", "Speed Potion" };
@@ -58,11 +58,13 @@ public class Inventory {
 
 
     public int getDefense(){
+        int defense = 0;
         for(int i = this.armors.length - 1; i >= 0; i--){
-            if(armors[i].hasArmor){
-                return armors[i].getDefense;
+            if(armors[i].hasArmor()){
+                return armors[i].getDefense();
             }
         }
+        return defense;
     }
 
     public void inventoryNav() {
@@ -139,11 +141,11 @@ public class Inventory {
 
     public void weaponMenu(){
         System.out.println("\nWhat would you like to equip");
-        for (int i = 0; i < unequipped.size - 1; i++) {
+        for (int i = 0; i < unequipped.size() - 1; i++) {
                 System.out.print("\n" + (i + 1) + ". ");
                 this.unequipped.get(i).weaponDesc();
     }
-        System.out.print("\n" + (unequipped.size) + ". Return");
+        System.out.print("\n" + (unequipped.size()) + ". Return");
         System.out.println("\nCurrent Weapons");
        for (int i = 0; i < equipped.length; i++){
             System.out.print("\nSlot " + (i + 1) + ". ");
