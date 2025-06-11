@@ -15,9 +15,9 @@ public class Combat {
     static int playerGold = 0;
 
     // Player movesets
-    static String[] attackMoveset = { "Slash", "Stab", "Fireball", "Thunder" };
-    static int[] attackDamageMoveset = { 5, 8, 9, 100 };
-    static int[] mpDeduction = { 0, 0, 10, 15 };
+    static String[] attackMoveset = Main.inventory.makeMoveSet();
+    static int[] attackDamageMoveset = Main.inventory.makeMoveSetDmg();
+    static int[] mpDeduction = Main.inventory.makeMoveSetMp();
 
     static String[] potionMoveset = inventory.getPotionNames();
     static int[] potionHealAmounts = inventory.getPotionModNum();

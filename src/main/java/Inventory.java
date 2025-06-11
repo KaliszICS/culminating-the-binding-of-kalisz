@@ -63,6 +63,48 @@ public class Inventory {
         return this.potionModNum;
     }
 
+    public Weapon[] getWeapons(){
+        return this.equipped;
+    }
+    public String[] makeMoveSet(){
+        String[] moveSet = new String[this.equipped.length];
+        for(int i = 0; i < moveSet.length; i++){
+            if(this.equipped[i] != null){
+                moveSet[i] = this.equipped[i].getName();
+            }
+            else{
+                moveSet[i] = "";
+            }
+        }
+        return moveSet;
+    }
+
+    public int[] makeMoveSetDmg(){
+        int[] moveSet = new int[this.equipped.length];
+        for(int i = 0; i < moveSet.length; i++){
+            if(this.equipped[i] != null){
+                moveSet[i] = this.equipped[i].getDamage();
+            }
+            else{
+                moveSet[i] = 0;
+            }
+        }
+        return moveSet;
+    }
+
+    public int[] makeMoveSetMp(){
+        int[] moveSetCosts = new int[this.equipped.length];
+        for(int i = 0; i < moveSetCosts.length; i++){
+            if(this.equipped[i] != null){
+                moveSetCosts[i] = this.equipped[i].getMpCost();
+            }
+            else{
+                moveSetCosts[i] = 0;
+            }
+        }
+        return moveSetCosts;
+    }
+
     public int getPotionCount(int index) {
         return this.potionCount[index];
     }
