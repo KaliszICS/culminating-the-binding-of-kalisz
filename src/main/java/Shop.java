@@ -247,6 +247,7 @@ public class Shop {
                     Main.inventory.addPotion(option-1, 1);
                     Combat.playerGold -= (potionCost[option-1]);
                     running = false;
+                    Main.showGame();
                 }
             } else if (option == this.potions.length+1) {
                 running = false;
