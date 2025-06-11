@@ -1,22 +1,23 @@
-public class Potion {
-    private String name;
-    private String effect;
+abstract class Potion {
+    protected String name;
+    protected String effect;
+    protected int statMod;
 
-    Potion(String name, String effect){
+    Potion(String name, String effect, int statMod){
 this.name = name;
 this.effect = effect;
-
+this.statMod = statMod;
     }
 
 
 
 public void potionDesc(){
-    System.out.print(this.name + ":" + this.effect);
+    System.out.print(this.name + ": " + this.effect);
 }
 
-public void usePotion(){
-    System.out.println("You have used a " + this.name + ".");
-}
+abstract void usePotion();
+    
+
 
 public String getEffect(){
     return this.effect;

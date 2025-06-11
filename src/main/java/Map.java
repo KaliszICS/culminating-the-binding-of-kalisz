@@ -98,7 +98,7 @@ public class Map {
                     break;
                 case 2:
                     System.out.println("Opening Inventory...");
-                    //run inventory
+                    Main.inventory.inventoryNav();
                     running = false;
                     break;
                 case 3:

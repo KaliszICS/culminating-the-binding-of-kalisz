@@ -10,16 +10,18 @@ public class Main {
 	// INTERNET HELP
 	// (https://github.com/karlasophiacruz/p3-softwareproject-refactoried/blob/9e01fb2e424f91121c1b64e6328e8450227d02d5/payroll/src/app/AuxFunctions.java)
 	public static void clearConsole() {
-		try {
-			if (System.getProperty("os.name").contains("Windows")) {
-				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-			} else {
-				new ProcessBuilder("clear").inheritIO().start().waitFor();
-			}
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	static Inventory inventory = new Inventory();
 
 	static String name;
 
@@ -91,5 +93,6 @@ public class Main {
 		map.print();
 		System.out.println("\nPlayer Gold: " + Combat.playerGold);
 	}
+
 
 }
