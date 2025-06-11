@@ -93,7 +93,7 @@ public class Map {
             switch (option) {
                 case 1:
                     System.out.println("Opening Shop...");
-                    //run the shop
+                    Main.shop.mainShop();
                     running = false;
                     break;
                 case 2:

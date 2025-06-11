@@ -37,7 +37,7 @@ public class Inventory {
             this.equipped = new Weapon[] {woodenSword, null, null, null};
             
         }
-    }
+    
 
     public String[] getPotionNames() {
         return this.potionNames;
@@ -49,6 +49,10 @@ public class Inventory {
 
     public Potion getPotion(int index) {
         return this.potions[index];
+    }
+
+    public Potion[] getPotions() {
+        return this.potions;
     }
 
     public int[] getPotionModNum() {
@@ -166,7 +170,7 @@ public class Inventory {
         Scanner input = new Scanner(System.in);
         while (running) {
             System.out.print("\nWhich potion do you want to use: ");
-            for (int i = 0; i < potions.length - 1; i++) {
+            for (int i = 0; i < potions.length - 2; i++) {
                 System.out.print("\n" + (i + 1) + ". ");
                 this.potions[i].potionDesc();
                 System.out.print(", Count: " + potionCount[i]);
@@ -176,7 +180,7 @@ public class Inventory {
                 input.nextLine();
                 System.out.println("Invalid choice! Please enter a valid number");
                 System.out.print("\nWhich potion do you want to use: ");
-                for (int i = 0; i < potions.length - 1; i++) {
+                for (int i = 0; i < potions.length - 2; i++) {
                     System.out.print("\n" + (i + 1) + ". ");
                     this.potions[i].potionDesc();
                     System.out.print(", Count: " + potionCount[i]);
@@ -185,7 +189,7 @@ public class Inventory {
             }
             option = input.nextInt();
             input.nextLine();
-            if (option > 0 && option < potions.length) {
+            if (option > 0 && option < potions.length-1) {
                 if (potionCount[option - 1] < 1) {
                     System.out.println("You do not have this potion");
                 } else {
@@ -193,7 +197,7 @@ public class Inventory {
                     potionCount[option - 1] --;
                     running = false;
                 }
-            } else if (option == potions.length) {
+            } else if (option == potions.length-1) {
                 running = false;
                 Main.showGame();
             } else {

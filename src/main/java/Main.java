@@ -89,6 +89,7 @@ public class Main {
 		}
 		scanner.close();
 	}
+	static Shop shop = new Shop();
 
 	static Player player = new Player(name, 100, 100, 70, null, null, null, null, null, null, 0);
 

@@ -108,4 +108,13 @@ public class Player {
     public void setGold(int gold) {
         this.gold = gold;
     }
+
+    public void subtractGold(int gold) {
+        this.gold -= gold;
+    }
+
+    public void addMaxHp(int hp){
+        this.maxHp += hp;
+        this.hp += hp;
+    }
 }

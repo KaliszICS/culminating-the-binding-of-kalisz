@@ -45,6 +45,7 @@ public class Casino {
         }
 
         System.out.println("\nReturning to the main menu...");
+        Main.showGame();
         s.close();
     }
 
