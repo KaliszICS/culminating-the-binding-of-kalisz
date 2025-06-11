@@ -14,10 +14,12 @@ public class Combat {
     // Player movesets
     static String[] attackMoveset = { "Slash", "Stab", "Fireball", "Thunder" };
     static int[] attackDamageMoveset = { 5, 8, 9, 100 };
-    static int[] mpDeduction = { 0, 0, 100, 15 };
+    static int[] mpDeduction = { 0, 0, 10, 15 };
 
     static String[] potionMoveset = { "Small Potion", "Medium Potion", "Large Potion", "Mega Potion" };
     static int[] potionHealAmounts = { 10, 20, 30, 40 };
+    static int[] potionSpeedAmounts = { 10, 20, 30, 40 };
+    static int[] potionMpAmounts = { 10, 20, 30, 40 };
 
     // Enemy (Monster)
     static Entity enemy;
@@ -52,17 +54,16 @@ public class Combat {
                 }
             }
 
-            enemyTurn();
+            if (enemy.hp > 0) {
+                enemyTurn();
+                System.out.println("\n--------------------- End of Turn ---------------------\n");
+            }
 
             if (playerHp <= 0) {
                 System.out.println("\nYou have been defeated. Room clear.");
                 break;
             }
-
-            System.out.println("\n--------------------- End of Turn ---------------------\n");
         }
-
-        scanner.close();
     }
 
     private static void displayBattleScreen() {
