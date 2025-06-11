@@ -2,99 +2,90 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Casino {
-    public static void main(String[] args) {
-        
+    public static void mainCasino() {
         Scanner s = new Scanner(System.in);
         Random random = new Random();
-        
-        //player gold for now
+
         int gold = Combat.playerGold;
 
-        //this is for when player intial gold is under a dollar, after this statement -> return back to main menu
         if (gold <= 0) {
             System.out.println("You are too broke to bet. Come back when you have gold.");
+            return;
         }
-            
-        System.out.println("\nWelcome to the Casino!");    
-       
-        
-        boolean game = true;
-        while (gold > 0 && game) {
-            int bet = 0;
-            while (true) {
-                System.out.print("\nInsert the amount of gold you want to bet on: ");
-                bet = s.nextInt();
-                if (bet <= gold && bet > 0){
-                    break;
-                }
-                else {
-                    System.out.println("\nInvalid bet. Please try again.");
-                }
-            }
-            s.nextLine();
 
-            String choice = "";
-            System.out.println("\nPlease choose Heads or Tails");
-            while (game) {           
-                System.out.print("Your choice (Type H/T): ");
-                choice = s.nextLine().toLowerCase();
-                if (choice.equalsIgnoreCase("H") || choice.equalsIgnoreCase("T")) {
-                break;
-                }
-                else {
-                    System.out.println("\nInvalid input. Please try again.\n"); 
-                }
+        System.out.println("\n🎰 Welcome to the Casino! 🎰");
+
+        boolean playing = true;
+        while (gold > 0 && playing) {
+            int bet = getValidBet(s, gold);
+            String playerChoice = getPlayerChoice(s);
+
+            double winChance = Math.max(0.2, 1.0 - ((double) bet / (gold + 1))); 
+            boolean playerWins = random.nextDouble() < winChance;
+            String correctSide;
+            if (random.nextBoolean()) {
+                correctSide = "h";
+            } else {
+                correctSide = "t";
             }
-            
-            boolean headsOrTails = random.nextBoolean();
-            String result;
-            if (headsOrTails == true) {
-                result = "T";
-            }
-            else {
-                result = "H";
-            }
-            if (choice.equalsIgnoreCase(result)) {
+
+            if (playerChoice.equals(correctSide)) {
                 gold += bet;
-                System.out.println("Congrats! You won. Now you have " + gold + " gold.");
-            }
-            else {
+                System.out.println("🎉 You guessed right! You won " + bet + " gold. New total: " + gold);
+            } else {
                 gold -= bet;
-                System.out.println("You lost. Now you have " + gold + " gold.");
+                System.out.println("💸 You guessed wrong. You lost " + bet + " gold. New total: " + gold);
                 if (gold <= 0) {
                     System.out.println("\nYou are out of gold. Come back when you have more.");
                     break;
                 }
             }
-            while (game) {
-                System.out.println("\nDo you want to play again?");
-                System.out.print("Your choice (Y/N): ");
-                String againChoice = s.nextLine().toLowerCase();
-                if (againChoice.equalsIgnoreCase("Y")) {
-                    break;
-                } 
-                else if (againChoice.equalsIgnoreCase("N")) {
-                    System.out.println("\nThank you for playing! Hope to see you back!");
-                    game = false;
-                    break;
-                    }
-                    else {
-                        System.out.println("\nInvalid input. Please select Y or N");
-                    }
-            }        
-        }           
+
+            playing = askToPlayAgain(s);
+        }
+
+        System.out.println("\nReturning to the main menu...");
         s.close();
-    } 
-}  
-    // link back to main menu or game
-    // System.out.println("TELEPORTING BACK TO MAIN MENU...");
+    }
 
+    private static int getValidBet(Scanner s, int gold) {
+        int bet;
+        while (true) {
+            System.out.print("\nEnter your bet (current gold: " + gold + "): ");
+            bet = s.nextInt();
+            if (bet > 0 && bet <= gold) {
+                s.nextLine(); // Clear buffer
+                return bet;
+            }
+            System.out.println("Invalid bet. Please try again.");
+        }
+    }
 
+    private static String getPlayerChoice(Scanner s) {
+        String choice;
+        System.out.println("\nChoose Heads or Tails:");
+        while (true) {
+            System.out.print("Your choice (H/T): ");
+            choice = s.nextLine().toLowerCase();
+            if (choice.equals("h") || choice.equals("t")) {
+                return choice;
+            }
+            System.out.println("Invalid input. Please enter H or T.");
+        }
+    }
 
-
-
-
-
-
-
-
+    private static boolean askToPlayAgain(Scanner s) {
+        while (true) {
+            System.out.print("\nPlay again? (Y/N): ");
+            String input = s.nextLine().toLowerCase();
+            if (input.equals("y")) {
+                return true;
+            }
+            if (input.equals("n")) {
+                System.out.println("Thanks for playing!");
+                return false;
+            }
+            System.out.println("Invalid input. Please enter Y or N.");
+        }
+    }
+}
