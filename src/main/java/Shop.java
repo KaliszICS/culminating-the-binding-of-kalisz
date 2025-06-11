@@ -47,7 +47,7 @@ public class Shop {
             System.out.print("\n1. Buy a potion");
             System.out.print("\n2. Buy a weapon");
             System.out.print("\n3. Go Gambling");
-            System.out.print("\n3. Exit");
+            System.out.print("\n4. Exit");
             while (!input.hasNextInt()) {
                 input.nextLine();
                 System.out.println("Invalid choice! Please enter a valid number");
