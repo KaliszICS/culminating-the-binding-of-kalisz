@@ -32,18 +32,18 @@ public class Inventory {
         String[] ArmorNames = new String[] { "Leather Armor", "Copper Armor", "Bronze Armor", "Chainmail Armor",
                 "Iron Armor", "Gold Armor", "Diamond Armor", "Platinum Armor", "Mithril Armor", "Obamium" };
         int increment = 10;
-        for (int i = 0; i < ArmorNames.length; i++) {
-            // Armor a = new Armor(ArmorNames[i], (i+1)*increment, false);
-            // this.armors[i] = a;
-
-            //armors[0].setTrue;
-
-
-        String[] weaponNames = new String[] {};
-        String[] weaponDamage = new String[] {};
-        int weaponSlots = 4;
-        this.equipped = new Weapon[weaponSlots];
-        
+        this.armors = new Armor[armorNames.length];
+        for (int i = 0; i < armorNames.length; i++) {
+            Armor a = new Armor(armorNames[i], (i+1)*increment, false);
+            this.armors[i] = a;
+            
+            armors[0].setHasArmor(true);
+            Weapon stick = new Melee("Stick", 200);            
+            Weapon woodenSword = new Melee("Wooden Sword", 20);
+            this.unequipped = new ArrayList<Weapon>();
+            this.unequipped.add(stick);
+            this.equipped = new Weapon[] {woodenSword, null, null, null};
+            
         }
     }
 
@@ -78,6 +78,10 @@ public class Inventory {
             potionCount[index]++;
         }
     }
+    
+    public void addWeapon(Weapon weapon){
+        this.unequipped.add(weapon);
+    }
 
     public void potionList() {
         for (int i = 0; i < this.potionCount.length; i++) {
@@ -86,6 +90,9 @@ public class Inventory {
         }
     }
 
+    public void usePotion(int index){
+        this.potionCount[index]--;
+    }
 
 
     public int getDefense(){
@@ -120,7 +127,7 @@ public class Inventory {
                 if (option == 1) {
                     this.potionNav();
                 } else {
-                    // weaponMenu();
+                    weaponMenu();
                 }
             } else {
                 System.out.println("Invalid choice! Please enter a valid number");
@@ -171,21 +178,110 @@ public class Inventory {
     }
 
     public void weaponMenu(){
-        System.out.println("\nWhat would you like to equip");
-        for (int i = 0; i < unequipped.size() - 1; i++) {
+        
+        int indexEquiped = -1;
+        int indexUnequiped = -1;
+        int option = -1;
+        boolean running = true;
+        Scanner input = new Scanner(System.in);
+        while (running) {
+            System.out.println("\nWhat would you like to equip");
+        for (int i = 0; i < unequipped.size(); i++) {
                 System.out.print("\n" + (i + 1) + ". ");
                 this.unequipped.get(i).weaponDesc();
     }
-        System.out.print("\n" + (unequipped.size()) + ". Return");
+        System.out.print("\n" + (this.unequipped.size()+1) + ". Return");
+        System.out.println("\nCurrent Weapons\n");
+       for (int i = 0; i < this.equipped.length; i++){
+            System.out.print("Slot " + (i + 1) + ". ");
+        if(this.equipped[i]==null){
+            System.out.println("Empty Slot");
+        }
+        else{
+            this.equipped[i].weaponDesc();
+            System.out.println("");
+        }
+    }
+            while (!input.hasNextInt()) {
+                input.nextLine();
+                System.out.println("Invalid choice! Please enter a valid number");
+                System.out.println("\nWhat would you like to equip");
+        for (int i = 0; i < unequipped.size(); i++) {
+                System.out.print("\n" + (i + 1) + ". ");
+                this.unequipped.get(i).weaponDesc();
+    }
+        System.out.print("\n" + (this.unequipped.size()+1) + ". Return");
         System.out.println("\nCurrent Weapons");
-       for (int i = 0; i < equipped.length; i++){
+       for (int i = 0; i < this.equipped.length; i++){
             System.out.print("\nSlot " + (i + 1) + ". ");
-        if(equipped[i]==null){
+        if(this.equipped[i]==null){
             System.out.print("Empty Slot");
         }
         else{
-            equipped[i].weaponDesc();
+            this.equipped[i].weaponDesc();
+        }
+            }
+        }
+            option = input.nextInt();
+            input.nextLine();
+            if (option > 0 && option < this.unequipped.size()+1) {
+                running = false;
+                indexUnequiped = option-1;
+            } else if (option == this.unequipped.size()+1) {
+                running = false;
+                Main.showGame();
+            } else {
+                System.out.println("Invalid choice! Please enter a valid number");
+            }
+        }
+
+        running = true;
+        while (running) {
+            System.out.println("\nWhat would you like to replace");
+
+        System.out.println("\nCurrent Weapons");
+       for (int i = 0; i < this.equipped.length; i++){
+            System.out.print("\nSlot " + (i + 1) + ". ");
+        if(this.equipped[i]==null){
+            System.out.print("Empty Slot");
+        }
+        else{
+            this.equipped[i].weaponDesc();
         }
     }
+            while (!input.hasNextInt()) {
+                input.nextLine();
+                System.out.println("Invalid choice! Please enter a valid number");
+                System.out.println("\nWhat would you like to replace");
+        
+        System.out.println("\nCurrent Weapons");
+       for (int i = 0; i < this.equipped.length; i++){
+            System.out.print("\nSlot " + (i + 1) + ". ");
+        if(this.equipped[i]==null){
+            System.out.print("Empty Slot");
+        }
+        else{
+            this.equipped[i].weaponDesc();
+        }
+            }
+        }
+            option = input.nextInt();
+            input.nextLine();
+            if (option > 0 && option < this.equipped.length+1) {
+            indexEquiped = option-1;
+            running = false;
+            } else {
+                System.out.println("Invalid choice! Please enter a valid number");
+            }
+        }
+Weapon temp = unequipped.get(indexUnequiped);
+if(equipped[indexEquiped] != null){
+    unequipped.add(equipped[indexEquiped]);
 }
-}
+unequipped.remove(indexUnequiped);
+equipped[indexEquiped] = temp;
+        Main.showGame();
+    }
+
+    }
+

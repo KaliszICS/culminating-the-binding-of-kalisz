@@ -3,5 +3,8 @@ public class Melee extends Weapon {
         super(name, damage);
     } 
 
-    pub
+@Override
+    public void weaponDesc(){
+        System.out.print(this.name + " Damage: " + this.damage);
+    }
 }
