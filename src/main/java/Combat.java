@@ -14,27 +14,24 @@ public class Combat {
     static int tempPlayerSpeed = playerSpeed;
     static int playerGold = 0;
 
-    // Player movesets
-    static String[] attackMoveset = Main.inventory.makeMoveSet();
-    static int[] attackDamageMoveset = Main.inventory.makeMoveSetDmg();
-    static int[] mpDeduction = Main.inventory.makeMoveSetMp();
-
+    
+    
     static String[] potionMoveset = inventory.getPotionNames();
     static int[] potionHealAmounts = inventory.getPotionModNum();
-
+    
     // Enemy (Monster)
     static Entity enemy;
-
+    
     static Scanner scanner = new Scanner(System.in);
-
+    
     public static void mainCombat(Room room) {
         enemy = Room.getRandomMonster(room.getRoomNumber());
-
+        
         // Main battle loop
         while (playerHp > 0 && enemy.hp > 0) {
             displayBattleScreen();
             playerTurn();
-
+            
             if (enemy.hp <= 0) {
                 System.out.println("\nEnemy " + enemy.name + " is defeated! You win!");
                 int goldReward = enemy.maxHp / 2;
@@ -55,12 +52,12 @@ public class Combat {
                     }
                 }
             }
-
+            
             if (enemy.hp > 0) {
                 enemyTurn();
                 System.out.println("\n--------------------- End of Turn ---------------------\n");
             }
-
+            
             if (playerHp <= 0) {
                 System.out.println("\nYou have been defeated. Room clear.");
                 playerSpeed = tempPlayerSpeed;
@@ -68,40 +65,44 @@ public class Combat {
             }
         }
     }
-
+    
     private static void displayBattleScreen() {
         System.out.println("======================= Battle ========================\n");
         System.out.println("Player: " + playerName);
         System.out.println("HP: " + playerHp + "/" + playerMaxHp);
         System.out.println("MP: " + playerMp + "/" + playerMaxMp);
         System.out.println("Speed: " + playerSpeed + "\n");
-
+        
         System.out.println("Enemy: " + enemy.name);
         System.out.println("HP: " + enemy.hp + "/" + enemy.maxHp);
         System.out.println("Speed: " + enemy.speed);
         System.out.println("Status: " + enemy.status + "\n");
     }
-
+    
     private static void playerTurn() {
         System.out.println("1. Attack    2. Potion");
         System.out.print("\nWhat option would you like to do?: ");
         int combatOption = scanner.nextInt();
         scanner.nextLine();
-
+        
         switch (combatOption) {
             case 1:
-                handleAttack();
-                break;
+            handleAttack();
+            break;
             case 2:
-                handlePotion();
-                break;
+            handlePotion();
+            break;
             default:
-                System.out.println("Invalid option! You lose your turn.");
-                break;
+            System.out.println("Invalid option! You lose your turn.");
+            break;
         }
     }
-
+    
     private static void handleAttack() {
+        // Player movesets
+        String[] attackMoveset = Main.inventory.makeMoveSet();
+        int[] attackDamageMoveset = Main.inventory.makeMoveSetDmg();
+        int[] mpDeduction = Main.inventory.makeMoveSetMp();
         System.out.println("\nChoose an attack move:");
         for (int i = 0; i < attackMoveset.length; i++) {
             if (mpDeduction[i] > 0) {
