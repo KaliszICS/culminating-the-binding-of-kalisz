@@ -29,7 +29,7 @@ public class Inventory {
             }
         }
 
-        String[] ArmorNames = new String[] { "Leather Armor", "Copper Armor", "Bronze Armor", "Chainmail Armor",
+        String[] armorNames = new String[] { "Leather Armor", "Copper Armor", "Bronze Armor", "Chainmail Armor",
                 "Iron Armor", "Gold Armor", "Diamond Armor", "Platinum Armor", "Mithril Armor", "Obamium" };
         int increment = 10;
         this.armors = new Armor[armorNames.length];
