@@ -173,7 +173,7 @@ public class Shop {
         while (running) {
             //user prompt(provides the selection of magic weapons)
             System.out.print("\nWhich magic weapon do you want to buy: ");
-            for (int i = 0; i < this.magicWeapons.length - 1; i++) {
+            for (int i = 0; i < this.magicWeapons.length; i++) {
                 System.out.print("\n" + (i + 1) + ". ");
                 this.magicWeapons[i].weaponDesc();
                 System.out.print(", Cost: " + magicCost[i]);
@@ -185,7 +185,7 @@ public class Shop {
                 //user prompt(provides the selection of magic weapons)
                 System.out.println("Invalid choice! Please enter a valid number");
                 System.out.print("\nWhich magic weapon do you want to buy: ");
-                for (int i = 0; i < magicWeapons.length - 1; i++) {
+                for (int i = 0; i < magicWeapons.length; i++) {
                     System.out.print("\n" + (i + 1) + ". ");
                     this.magicWeapons[i].weaponDesc();
                     System.out.print(", Cost: " + magicCost[i]);
@@ -229,7 +229,7 @@ public class Shop {
         while (running) {
              //user prompt(provides the selection of melee weapons)
             System.out.print("\nWhich melee weapon do you want to buy: ");
-            for (int i = 0; i < this.meleeWeapons.length- 1; i++) {
+            for (int i = 0; i < this.meleeWeapons.length; i++) {
                 System.out.print("\n" + (i + 1) + ". ");
                 this.meleeWeapons[i].weaponDesc();
                 System.out.print(", Cost: " + meleeCost[i]);
@@ -241,7 +241,7 @@ public class Shop {
                  //user prompt(provides the selection of melee weapons)
                 System.out.println("Invalid choice! Please enter a valid number");
                 System.out.print("\nWhich melee weapon do you want to buy: ");
-                for (int i = 0; i < meleeWeapons.length - 1; i++) {
+                for (int i = 0; i < meleeWeapons.length; i++) {
                     System.out.print("\n" + (i + 1) + ". ");
                     this.meleeWeapons[i].weaponDesc();
                     System.out.print(", Cost: " + meleeCost[i]);
