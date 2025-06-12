@@ -88,9 +88,9 @@ public class Combat {
             
             //If player died, handle defeat.
             if (playerHp <= 0) {
+                Main.clearConsole();
                 System.out.println("\nYou have been defeated. Game over.");
-                playerSpeed = tempPlayerSpeed;
-                break;
+                System.out.println("\nRun the game to start over!!!");
             }
         }
     }

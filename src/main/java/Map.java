@@ -111,8 +111,13 @@ public class Map {
     public void printOptions() {
         Scanner scanner = new Scanner(System.in);
         //player prompt
-        System.out.println(" 1.SHOP\n 2.INVENTORY\n 3.Continue");
+        System.out.println("\n======= Stats =======");
+        System.out.println("Player: " + Combat.playerName);
+        System.out.println("Hp: " + Combat.playerHp + "/" + Combat.playerMaxHp);
+        System.out.println("MP: " + Combat.playerMp + "/" + Combat.playerMaxMp);
+        System.out.println("Speed: " + Combat.playerSpeed);
         System.out.println("\nPlayer Gold: " + Combat.playerGold);
+        System.out.println("\n1.SHOP\n2.INVENTORY\n3.CONTINUE");
         boolean running = true;
         while (running) {
             System.out.print("\nType a choice: ");
