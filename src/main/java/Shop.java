@@ -286,7 +286,7 @@ public class Shop {
         while (running) {
             //user prompt(provides the selection of potions)
             System.out.print("\nWhich potion do you want to buy: ");
-            for (int i = 0; i < this.potions.length - 1; i++) {
+            for (int i = 0; i < this.potions.length; i++) {
                 System.out.print("\n" + (i + 1) + ". ");
                 this.potions[i].potionDesc();
                 System.out.print(", Cost: " + potionCost[i]);
@@ -298,7 +298,7 @@ public class Shop {
                 //user prompt(provides the selection of potions)
                 System.out.println("Invalid choice! Please enter a valid number");
                 System.out.print("\nWhich potion do you want to buy: ");
-                for (int i = 0; i < this.potions.length - 1; i++) {
+                for (int i = 0; i < this.potions.length; i++) {
                     System.out.print("\n" + (i + 1) + ". ");
                     this.potions[i].potionDesc();
                     System.out.print(", Cost: " + potionCost[i]);

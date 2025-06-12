@@ -145,6 +145,19 @@ public class Combat {
         String[] attackMoveset = Main.inventory.makeMoveSet();
         int[] attackDamageMoveset = Main.inventory.makeMoveSetDmg();
         int[] mpDeduction = Main.inventory.makeMoveSetMp();
+
+        for (int i = 0; i < attackMoveset.length; i++) {
+            if (mpDeduction[i] > 0) {
+                System.out.print((i + 1) + ". " + attackMoveset[i] + " (MP Cost: " + mpDeduction[i] + ")   ");
+            } else {
+                System.out.print((i + 1) + ". " + attackMoveset[i] + "   ");
+            }
+        }
+        System.out.println();
+        System.out.print("Select your move (1-4): ");
+        while(!(scanner.hasNextInt())){
+            scanner.nextLine();
+        System.out.println("Invalid input! Please input an integer");
         System.out.println("\nChoose an attack move:");
         for (int i = 0; i < attackMoveset.length; i++) {
             if (mpDeduction[i] > 0) {
@@ -155,6 +168,8 @@ public class Combat {
         }
         System.out.println();
         System.out.print("Select your move (1-4): ");
+    }
+
         int attackOption = scanner.nextInt();
         scanner.nextLine();
 
@@ -197,16 +212,20 @@ public class Combat {
     private static void handlePotion() {
         System.out.println("\nChoose a potion:");
         // List all available potions + a Cancel option
-        for (int i = 0; i < potionMoveset.length; i++) {
-            System.out.println((i + 1) + ". " + potionMoveset[i] + " - " + inventory.getPotionEffects()[i] +
+        while(!(scanner.hasNextInt())){
+            scanner.nextLine();
+            for (int i = 0; i < potionMoveset.length; i++) {
+                System.out.println("Invalid input! Please input an integer");
+                System.out.println((i + 1) + ". " + potionMoveset[i] + " - " + inventory.getPotionEffects()[i] +
                     " (Count: " + inventory.getPotionCount(i) + ")");
         }
         System.out.println((potionMoveset.length + 1) + ". Cancel");
 
         System.out.print("Select a potion (1-" + (potionMoveset.length + 1) + "): ");
+    }
         int potionChoice = scanner.nextInt();
         scanner.nextLine();
-
+        
         // Cancel or invalid -> skip turn
         if (potionChoice < 1 || potionChoice > potionMoveset.length + 1) {
             System.out.println("Invalid option. Turn skipped.");
