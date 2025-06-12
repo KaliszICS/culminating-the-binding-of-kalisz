@@ -119,9 +119,14 @@ public class Combat {
     private static void playerTurn() {
         System.out.println("1. Attack    2. Potion");
         System.out.print("\nWhat option would you like to do?: ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid option!");
+            scanner.nextLine();
+            System.out.println("\n1. Attack    2. Potion");
+            System.out.print("\nWhat option would you like to do?: ");
+        }
         int combatOption = scanner.nextInt();
         scanner.nextLine();
-        
         switch (combatOption) {
             case 1:
             handleAttack();

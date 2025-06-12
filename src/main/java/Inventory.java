@@ -461,6 +461,7 @@ public class Inventory {
         }
         unequipped.remove(indexUnequiped);
         equipped[indexEquiped] = temp;
+        running = false;
         Main.showGame();
     }
 
