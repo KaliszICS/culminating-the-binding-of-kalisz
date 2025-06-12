@@ -7,8 +7,12 @@
 	*/
 
 import java.util.Random;
-
+/**
+ * 
+ */
 public class Room {
+  
+  // Instance variable
   private String roomID;
   private boolean isCleared;
   private int previousRoom;
