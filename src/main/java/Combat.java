@@ -211,11 +211,20 @@ public class Combat {
      */
     private static void handlePotion() {
         System.out.println("\nChoose a potion:");
+        for (int i = 0; i < potionMoveset.length; i++) {
+                System.out.println((i + 1) + ". " + potionMoveset[i] + " - " + inventory.getPotionEffects()[i] +
+                    " (Count: " + inventory.getPotionCount(i) + ")");
+        }
+        System.out.println((potionMoveset.length + 1) + ". Cancel");
+
+        System.out.print("Select a potion (1-" + (potionMoveset.length + 1) + "): ");
+    
+        
         // List all available potions + a Cancel option
         while(!(scanner.hasNextInt())){
             scanner.nextLine();
+            System.out.println("Invalid input! Please input an integer");
             for (int i = 0; i < potionMoveset.length; i++) {
-                System.out.println("Invalid input! Please input an integer");
                 System.out.println((i + 1) + ". " + potionMoveset[i] + " - " + inventory.getPotionEffects()[i] +
                     " (Count: " + inventory.getPotionCount(i) + ")");
         }

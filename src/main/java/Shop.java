@@ -196,7 +196,7 @@ public class Shop {
             option = input.nextInt();
             input.nextLine();
             //valid input range
-            if (option > 0 && option < magicWeapons.length) {
+            if (option > 0 && option < magicWeapons.length + 1) {
                 //checks if the player has the money to buy
                 if (magicCost[option - 1] > Combat.playerGold) {
                     System.out.println("You do not enough money");
@@ -252,7 +252,7 @@ public class Shop {
             option = input.nextInt();
             input.nextLine();
             //valid inputs
-            if (option > 0 && option < meleeWeapons.length) {
+            if (option > 0 && option < meleeWeapons.length + 1) {
                 //checks if the player has the money to buy
                 if (meleeCost[option - 1] > Combat.playerGold) {
                     System.out.println("You do not enough money");
