@@ -327,6 +327,7 @@ public class Inventory {
                 else {
                     potions[option - 1].usePotion();
                     potionCount[option - 1]--;
+                    Combat.playerHp+= potionModNum[option-1];
                     Main.showGame();
                     running = false;
                 }
