@@ -79,7 +79,7 @@ public class Shop {
             option = input.nextInt();
             input.nextLine();
             //valid inputs
-            if (option > 0 && option <= 4) {
+            if (option > 0 && option <= 5) {
                 running = false;
                 if (option == 1) {
                     //go to potions screen
