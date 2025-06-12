@@ -4,7 +4,7 @@
 public class HealthPotion extends Potion{
     
     /**
-     * 
+     * runs the super class' constuctor 
      * @param name health potion's name
      * @param effect health potion's effect
      * @param statMod health potion's healing stats

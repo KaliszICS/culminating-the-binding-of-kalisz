@@ -4,7 +4,7 @@
 public class ManaPotion extends Potion{
     
     /**
-     * 
+     * runs the super class constructor 
      * @param name mana potion's name
      * @param effect mana potion's effect 
      * @param statMod mana potion's speeding stats

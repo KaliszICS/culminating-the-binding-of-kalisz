@@ -1,5 +1,9 @@
 /**
-	* The card class allows for the creation of an inventory of the player. By default, it creates an array of potions that will be stored and a parallel array noting the count of the potions. It also allows you to equip up to 4 weapons and swap/add weapons. It also has methods to create a moveset that will be used in combat. Additionally the inventory class allows you to use potions outside of combat(specifically healing ones)
+	* The Inventory class allows for the creation of an inventory of the player.
+    * By default, it creates an array of potions that will be stored and a parallel array noting the count of the potions.
+    * It also allows you to equip up to 4 weapons and swap/add weapons.
+    * It also has methods to create a moveset that will be used in combat.
+    * Additionally the inventory class allows you to use potions outside of combat(specifically healing ones)
 	* @author Jerry Zhu
 	* @version 1.0.1
 	*/

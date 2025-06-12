@@ -1,3 +1,11 @@
+/**
+	* The Room class allows for the creation of a room with a roomID, clear/unlocked status, and room number
+  * It is also responsible for providing colours that will be used on the map for the room ids
+  * It houses the monsters within the game as well, which are the enemies to defeat throughout the game
+	* @author Jerry Zhu, Jamin Xie
+	* @version 1.0.1
+	*/
+
 import java.util.Random;
 
 public class Room {
@@ -7,11 +15,19 @@ public class Room {
   private int roomNumber;
   private boolean isUnlocked;
 
+  /**
+   * This constructor creates a room with parameters roomID, roomNumber and previous room.
+   * it also sets the default states of the rooms to be created
+   * @param roomID a String representing the ID of the room in the format L(Level Number)
+   * @param roomNumber represents the number associated with the room
+   * @param previousRoom  represents the number associated with the previous room
+   */
   public Room(String roomID, int roomNumber, int previousRoom) {
     this.isCleared = false;
     this.roomID = roomID;
     this.previousRoom = previousRoom;
     this.roomNumber = roomNumber;
+    //first room is always unlocked at the start
     if (roomNumber == 1) {
       isUnlocked = true;
     } else {
@@ -19,55 +35,96 @@ public class Room {
     }
   }
 
+  /**
+   * This method gets the Room's roomID
+   * @return returns the roomID as a String
+   */
   public String getRoomID() {
     return this.roomID;
   }
 
+    /**
+   * This method gets the value of isCleared
+   * @return returns the value of isCleared as a boolean
+   */
   public boolean isCleared() {
     return this.isCleared;
   }
 
+  /**
+   * This method gets the value of isUnlocked
+   * @return returns the value of isUnlocked as a boolean
+   */
   public boolean isUnlocked() {
     return this.isUnlocked;
   }
 
+  /**
+   * This method gets the previous Room's room number
+   * @return returns the the previous Room's room number as an int
+   */
   public int getPreviousROom() {
     return this.previousRoom;
   }
 
+  /**
+   * This method gets the Room's room number
+   * @return returns the the Room's room number as an int
+   */
   public int getRoomNumber() {
     return this.roomNumber;
   }
 
+  /**
+   * This method sets the value of isCleared as true
+   */
   public void setClear() {
     this.isCleared = true;
   }
 
+  /**
+   * This method sets the value of isUnlocked as false
+   */
   public void setLocked() {
     this.isUnlocked = false;
   }
 
+  /**
+   * This method sets the value of isUnlocked as true
+   */
   public void setUnlocked() {
     this.isUnlocked = true;
   }
 
+  /**
+   * This method is responsible for creating the room nodes on the map and giving them the appropriate colours
+   * @return returns the coloured form of the room node as a String 
+   */
   public String crID() {
     String colourRoomID;
     // boss room always red
     if (roomNumber == 32) {
       colourRoomID = "\u001B[31m" + "[" + roomID + "]" + "\u001B[0m";
       return colourRoomID;
+    //clear is second priority(colour as green)
     } else if (this.isCleared) {
       colourRoomID = "\u001B[32m" + "[" + roomID + "]" + "\u001B[0m";
       return colourRoomID;
+    //unlocked is third priority(colour as yellow)
     } else if (this.isUnlocked) {
       colourRoomID = "\u001B[33m" + "[" + roomID + "]" + "\u001B[0m";
       return colourRoomID;
+    //otherwise uncoloured
     } else {
       return "[" + roomID + "]";
     }
   }
 
+  /**
+   * This method is responsible for creating all of the monsters that the player will fight and scale difficulty wise based on room number
+   * @param roomNumber represents the number associated with the room that will be used to scale difficulty
+   * @return returns an Entity (enemy) that is scaled in difficulty with repsect to the room number
+   */
   public static Entity getRandomMonster(int roomNumber) {
     Random rand = new Random();
     Entity baseMonster;
@@ -75,6 +132,7 @@ public class Room {
     if (roomNumber == 32) {
       int bossPick = rand.nextInt(5);
 
+      //boss monsters for room 32(boss room)
       switch (bossPick) {
         case 0:
           baseMonster = new Entity(
@@ -129,6 +187,7 @@ public class Room {
 
     int pick = rand.nextInt(11);
 
+    //list of regular mobs to pick from
     switch (pick) {
       case 0:
         baseMonster = new Entity(
@@ -222,6 +281,7 @@ public class Room {
         return null;
     }
 
+    //difficulty scaling(+5% difficulty per increment in room numeber)
     double multiplier = 1 + (roomNumber * 0.05);
     baseMonster.scaleStats(multiplier);
     return baseMonster;

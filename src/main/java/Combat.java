@@ -3,9 +3,9 @@ import java.util.Random;
 
 /**
  * Manages turn-based combat between the player and a randomly selected enemy.
- * 
  * The battle continues until either the player's HP or the enemy's HP drops to zero.
  * Support attack moves, potions, and enemy actions (damage, heal, speed buffs).
+ * @author Jamin Xie
  */
 public class Combat {
     /**

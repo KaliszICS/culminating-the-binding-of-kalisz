@@ -1,5 +1,7 @@
 /**
-	* The card class allows for the creation of an map and the main option select screen for the game. It maps out all thier rooms and their order, allowing for the printing of the main map. It is also responsible for room selection for the progression of the game and for keeping track of the state of rooms
+	* The Map class allows for the creation of an map and the main option select screen for the game.
+    * It maps out all thier rooms and their order, allowing for the printing of the main map.
+    * It is also responsible for room selection for the progression of the game and for keeping track of the state of rooms
 	* @author Jerry Zhu, Jamin Xie
 	* @version 1.0.1
 	*/
