@@ -63,7 +63,7 @@ public class Shop {
             System.out.print("\n2. Buy a weapon");
             System.out.print("\n3. Buy armor");
             System.out.print("\n4. Go Gambling");
-            System.out.print("\n5. Exit");
+            System.out.println("\n5. Exit");
             //check if input is integer
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -74,7 +74,7 @@ public class Shop {
                 System.out.print("\n2. Buy a weapon");
                 System.out.print("\n3. Buy armor");
                 System.out.print("\n4. Go Gambling");
-                System.out.print("\n5. Exit");
+                System.out.println("\n5. Exit");
             }
             option = input.nextInt();
             input.nextLine();
@@ -126,7 +126,7 @@ public class Shop {
             System.out.print("\nWhat would you like to buy: ");
             System.out.print("\n1. Magic Weapons");
             System.out.print("\n2. Melee Weapons");
-            System.out.print("\n3. Exit");
+            System.out.println("\n3. Exit");
             //check for integer input
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -135,7 +135,7 @@ public class Shop {
                 System.out.print("\nWhat would you like to buy: ");
                 System.out.print("\n1. Magic Weapons");
                 System.out.print("\n2. Melee Weapons");
-                System.out.print("\n3. Exit");
+                System.out.println("\n3. Exit");
             }
             option = input.nextInt();
             input.nextLine();
@@ -343,7 +343,7 @@ public class Shop {
                 System.out.print("\nWould you like to upgrade your armor?: ");
                 System.out.print("\n1. Yes(+10 Maxhp, -25 gold)");
                 //exit option
-                System.out.print("\n2. No");
+                System.out.println("\n2. No");
             while (!input.hasNextInt()) {
                 input.nextLine();
                 //user prompt
@@ -351,7 +351,7 @@ public class Shop {
                 System.out.print("\nWould you like to upgrade your armor?: ");
                 System.out.print("\n1. Yes(+10 Maxhp, -25 gold)");
                 //exit option
-                System.out.print("\n2. No");
+                System.out.println("\n2. No");
                 }
                 option = input.nextInt();
                 input.nextLine();

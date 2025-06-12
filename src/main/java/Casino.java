@@ -73,16 +73,27 @@ public class Casino {
      * @return the validated bet amount
      */
     private static int getValidBet(Scanner s, int gold) {
-        int bet;
-        while (true) {
+        int bet = -1;
+        boolean running = true;
+        
+        while(running){
+            
             System.out.print("\nEnter your bet (current gold: " + gold + "): ");
+            while(!(s.hasNextInt())){
+                s.nextLine();
+            System.out.print("\nInvalid bet! Please input an integer");
+            System.out.print("\nEnter your bet (current gold: " + gold + "): ");
+            }
+            
             bet = s.nextInt();
             if (bet > 0 && bet <= gold) {
                 s.nextLine(); // Clear input buffer
                 return bet;
             }
             System.out.println("Invalid bet. Please try again.");
+            
         }
+return bet;
     }
 
     /**
