@@ -18,7 +18,6 @@ public class Leaderboard {
     public Leaderboard(String filePath) {
         records = readScores(filePath);
     }
-
     /**
      * Saves a new score to the leaderboard file in the format "Name": "Time".
      * 
