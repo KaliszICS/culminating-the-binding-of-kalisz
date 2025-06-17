@@ -1,0 +1,7 @@
+Room aggregates Monster by arrow but has an enemy instance variable in it.
+Your game does not appear to save?
+Main menu is missing leaderboard variable (only has a method).  Uses composition arrow.
+Casino method is ambiguous since there is no Casino method but there is in shop.  where does the information for gamble come from?
+Shop missing from game (Composition)
+
+75

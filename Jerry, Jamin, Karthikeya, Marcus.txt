@@ -1,0 +1,17 @@
+username should probably not allow to be empty.
+missing input request for item swap
+Would be an improvement to be able to buy multiple potions at once.
+Game attempts to go back to a menu when it ends and then crashes.  I think this has to do with if you go to the item swap menu too many times
+final boss outputs you lost like 5 times.
+healing potions allow you to go over your max hp.
+Might have been a bit easier and more reduced in overall code if you used more polymorphism to deal with the different types of items.
+Items such as weapons, potions should have all been stored on the player when equiped instead of being strings.
+
+Otherwise Great work!
+
+
+K(30%): 100
+I(30%): 80
+C(10%): 100
+A(30%): 80
+88
